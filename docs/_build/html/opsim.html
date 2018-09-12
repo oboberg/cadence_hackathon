@@ -85,7 +85,21 @@
 <li class="toctree-l1"><a class="reference internal" href="docker.html">Docker installation and configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="directories.html">Directories and GitHub repos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="maf.html">MAF</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">OpSim</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">OpSim</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-the-opsim-docker-image">Getting the OpSim Docker image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#start-a-docker-container">Start a Docker container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#now-we-are-in-the-container">Now we are in the container</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setup-the-opsim-tracking-database">Setup the OpSim tracking database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#start-a-one-day-simulation-with-the-feature-based-scheduler">Start a one day simulation with the feature based scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#start-a-one-day-simulation-with-the-proposal-scheduler">Start a one day simulation with the proposal scheduler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#useful-information-in-the-logs">Useful information in the logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-simulations">Configuring Simulations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setup-up-the-repos-for-new-configurations">Setup up the repos for new configurations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-new-feature-based-configuration">A new feature based configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
             
@@ -152,7 +166,289 @@
             
   <div class="section" id="opsim">
 <h1>OpSim<a class="headerlink" href="#opsim" title="Permalink to this headline">¶</a></h1>
-<p>This is a test</p>
+<p>Here we will go over how to run a very simple one night simulation. Before
+following these directions, make sure you have set up the directories as
+described in <a class="reference internal" href="directories.html#directories"><span class="std std-ref">Directories and GitHub repos</span></a>. If you have
+followed those directions, make sure your present working directory is <code class="docutils literal"><span class="pre">~/flatiron</span></code>.</p>
+<div class="section" id="getting-the-opsim-docker-image">
+<h2>Getting the OpSim Docker image<a class="headerlink" href="#getting-the-opsim-docker-image" title="Permalink to this headline">¶</a></h2>
+<p>Use this command on your local host to pull the latest OpSim Docker image from
+the docker hub:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">pull</span> <span class="n">oboberg</span><span class="o">/</span><span class="n">opsim4_fbs_py3</span><span class="p">:</span><span class="n">latest</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="start-a-docker-container">
+<h2>Start a Docker container<a class="headerlink" href="#start-a-docker-container" title="Permalink to this headline">¶</a></h2>
+<p>Running the following command will start a docker container using the
+<code class="docutils literal"><span class="pre">oboberg/opsim4_fbs_py3:latest</span></code> image. This command will also mount local
+directories into the container so that the OpSim output is saved.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>docker run -it --rm -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>/opsimv4_data/run_local:/home/opsim/run_local <span class="se">\</span>
+                    -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>/my_repos:/home/opsim/my_repos <span class="se">\</span>
+                    -e <span class="nv">OPSIM_HOSTNAME</span><span class="o">=</span>opsim-docker<span class="se">\</span>
+                    -p <span class="m">8888</span>:8888 <span class="se">\</span>
+                     oboberg/opsim4_fbs_py3:latest
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Breakdown of command:</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal"><span class="pre">docker</span> <span class="pre">run</span></code> run a docker container</li>
+<li><code class="docutils literal"><span class="pre">-it</span></code> Give me an an interactive shell in the container</li>
+<li><code class="docutils literal"><span class="pre">--rm</span></code> remove the container after it is stopped</li>
+<li><code class="docutils literal"><span class="pre">-v</span> <span class="pre">${PWD}/opsimv4_data/run_local</span></code> mounts the local <cite>run_dir</cite> into the container at the path <code class="docutils literal"><span class="pre">/home/opsim/run_local</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">-e</span> <span class="pre">OPSIM_HOSTNAME=opsim-docker</span></code> sets the <code class="docutils literal"><span class="pre">OPSIM_HOSTNAME</span></code> environment variable inside the container. This sets the name of the run tracking database and other output files. You can change this to whatever name you like.</li>
+<li><code class="docutils literal"><span class="pre">-p</span> <span class="pre">8888:8888</span></code> this is read as <code class="docutils literal"><span class="pre">port</span> <span class="pre">on</span> <span class="pre">host:port</span> <span class="pre">on</span> <span class="pre">container</span></code>. Meaning port <code class="docutils literal"><span class="pre">8888</span></code> in the container will be fed to port <code class="docutils literal"><span class="pre">8888</span></code> on your local host.This allows you to use things like <code class="docutils literal"><span class="pre">jupyter</span> <span class="pre">lab</span></code>.</li>
+<li><code class="docutils literal"><span class="pre">oboberg/opsim4_fbs_py3:latest</span></code> this is the name of the docker image. If you don&#8217;t already have it from doing <code class="docutils literal"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">oboberg/opsim4_fbs_py3:latest</span></code>, it will automatically be pulled.</li>
+</ul>
+</dd>
+</dl>
+<p>After running this command you will see a lot of dialog about all of the packages that are
+being setup. The final message will be about a <code class="docutils literal"><span class="pre">scons</span></code> test failing, but you do not
+need to worry about this.</p>
+</div>
+<div class="section" id="now-we-are-in-the-container">
+<h2>Now we are in the container<a class="headerlink" href="#now-we-are-in-the-container" title="Permalink to this headline">¶</a></h2>
+<p>The terminal where you ran the docker command will now be a terminal inside the
+docker container. It will look something like this</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 ~<span class="o">]</span>
+</pre></div>
+</div>
+<p>If you run an <code class="docutils literal"><span class="pre">ls</span></code> command you should see the following if you setup the directory structure
+previously mentioned.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 ~<span class="o">]</span>$ ls
+dds  default_configs  my_repos  pull_and_config.sh  pull_repos.sh  repos  run_and_config.sh  run_local  sky_brightness_data  stack  startup_fbs.sh
+</pre></div>
+</div>
+</div>
+<div class="section" id="setup-the-opsim-tracking-database">
+<h2>Setup the OpSim tracking database<a class="headerlink" href="#setup-the-opsim-tracking-database" title="Permalink to this headline">¶</a></h2>
+<p>Run this command to setup the database that will be used to track OpSim runs. For
+this command make sure you give the full path for the <code class="docutils literal"><span class="pre">save-dir</span></code>.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>manage_db --save-dir<span class="o">=</span>/home/opsim/run_local/output/
+</pre></div>
+</div>
+<p>If you <code class="docutils literal"><span class="pre">ls</span></code> the directory <code class="docutils literal"><span class="pre">run_local/output/</span></code> you will see the file <code class="docutils literal"><span class="pre">opsim-docker_sessions.db</span></code>.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 ~<span class="o">]</span>$ ls run_local/output/
+opsim-docker_sessions.db
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To get sense of how the volume mounting works, open a new terminal, or system browser,
+and navigate to <code class="docutils literal"><span class="pre">~/flatiron/opsimv4_data/run_local/output</span></code>. There you will also see
+the file <code class="docutils literal"><span class="pre">opsim-docker_sessions.db</span></code>.</p>
+</div>
+</div>
+<div class="section" id="start-a-one-day-simulation-with-the-feature-based-scheduler">
+<h2>Start a one day simulation with the feature based scheduler<a class="headerlink" href="#start-a-one-day-simulation-with-the-feature-based-scheduler" title="Permalink to this headline">¶</a></h2>
+<p>In the docker container <code class="docutils literal"><span class="pre">cd</span></code> in the the <code class="docutils literal"><span class="pre">run_local</span></code> directory and run this
+command. (Note: do not include the <code class="docutils literal"><span class="pre">(lsst-scipipe-fcd27eb)</span> <span class="pre">[opsim&#64;9d54f5d124e1</span> <span class="pre">run_local]$</span></code> bit)</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 run_local<span class="o">]</span>$ opsim4 --frac-duration<span class="o">=</span><span class="m">0</span>.003
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">--frac-duration</span></code> sets the length of the simulation and it is untis of fraction of a year.
+<code class="docutils literal"><span class="pre">(1</span> <span class="pre">/</span> <span class="pre">365)</span></code> is about <code class="docutils literal"><span class="pre">0.003</span></code>, for a full simulation <code class="docutils literal"><span class="pre">--frac-duration</span></code> is <code class="docutils literal"><span class="pre">10</span></code>.</p>
+<p>Now if you <code class="docutils literal"><span class="pre">ls</span></code> in the the <code class="docutils literal"><span class="pre">run_local</span></code> directory you see that a log file has been
+produced. The actual OpSim database created by our one night run will be in <code class="docutils literal"><span class="pre">run_local/output</span></code>.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 run_local<span class="o">]</span>$ ls
+opsim-docker_2000.log  output
+<span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 run_local<span class="o">]</span>$ ls output/
+opsim-docker_2000.db  opsim-docker_sessions.db
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can see that the log file and output database share the same file root
+as the session database <code class="docutils literal"><span class="pre">opsim-docker</span></code>. The number <code class="docutils literal"><span class="pre">2000</span></code> will be autamotically
+increased by <code class="docutils literal"><span class="pre">1</span></code> as we run additional simulations.</p>
+</div>
+</div>
+<div class="section" id="start-a-one-day-simulation-with-the-proposal-scheduler">
+<h2>Start a one day simulation with the proposal scheduler<a class="headerlink" href="#start-a-one-day-simulation-with-the-proposal-scheduler" title="Permalink to this headline">¶</a></h2>
+<p>To use the proposal scheduler we simply provide another command line option to
+the <code class="docutils literal"><span class="pre">opsim4</span></code> command.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 run_local<span class="o">]</span>$ opsim4 --frac-duration<span class="o">=</span><span class="m">0</span>.003 --scheduler proposal
+</pre></div>
+</div>
+<p>Again, if you <code class="docutils literal"><span class="pre">ls</span></code> in the the <code class="docutils literal"><span class="pre">run_local</span></code> directory you see that another log file and output database
+have been produced. Also note that the run number increased from <code class="docutils literal"><span class="pre">2000</span></code> to <code class="docutils literal"><span class="pre">2001</span></code>.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 run_local<span class="o">]</span>$ ls
+opsim-docker_2000.log  opsim-docker_2001.log  output
+<span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 run_local<span class="o">]</span>$ ls output/
+opsim-docker_2000.db  opsim-docker_2001.db  opsim-docker_sessions.db
+</pre></div>
+</div>
+</div>
+<div class="section" id="useful-information-in-the-logs">
+<h2>Useful information in the logs<a class="headerlink" href="#useful-information-in-the-logs" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s run the <code class="docutils literal"><span class="pre">head</span></code> command on the two logs to see some useful information
+about which scheduler was used, and the path the default configuration.</p>
+<ul class="simple">
+<li>First the feature based run <code class="docutils literal"><span class="pre">opsim-docker_2000</span></code></li>
+</ul>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 run_local<span class="o">]</span>$ head -n5 opsim-docker_2000.log
+<span class="m">2018</span>-09-12 <span class="m">18</span>:31:36,203 - INFO - root - Loading feature driver
+<span class="m">2018</span>-09-12 <span class="m">18</span>:31:36,616 - DEBUG - matplotlib.backends - backend Qt5Agg version <span class="m">5</span>.9.2
+<span class="m">2018</span>-09-12 <span class="m">18</span>:31:37,062 - DEBUG - kernel.Simulator - Using default configuration path: /home/opsim/repos/scheduler_config/config_run/
+<span class="m">2018</span>-09-12 <span class="m">18</span>:31:37,198 - INFO - kernel.Simulator - Initializing simulation
+<span class="m">2018</span>-09-12 <span class="m">18</span>:31:37,199 - INFO - kernel.Simulator - Simulation Session <span class="nv">Id</span> <span class="o">=</span> <span class="m">2000</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>You can see in <code class="docutils literal"><span class="pre">line</span> <span class="pre">1</span></code> that the feature scheduler was used <code class="docutils literal"><span class="pre">INFO</span> <span class="pre">-</span> <span class="pre">root</span> <span class="pre">-</span> <span class="pre">Loading</span> <span class="pre">feature</span> <span class="pre">driver</span></code></li>
+<li>You can also see the path to the configuration that was used for the simulation <code class="docutils literal"><span class="pre">Using</span> <span class="pre">default</span> <span class="pre">configuration</span> <span class="pre">path:</span> <span class="pre">/home/opsim/repos/scheduler_config/config_run/</span></code>.
+We will come back to this in the next section.</li>
+<li>Now the proposal based run <code class="docutils literal"><span class="pre">opsim-docker_2001</span></code></li>
+</ul>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 run_local<span class="o">]</span>$ head -n5 opsim-docker_2001.log
+<span class="m">2018</span>-09-12 <span class="m">18</span>:47:00,561 - INFO - root - Loading proposal driver
+<span class="m">2018</span>-09-12 <span class="m">18</span>:47:00,813 - INFO - schedulerDriver - buildFieldsTable: <span class="m">5292</span> fields
+<span class="m">2018</span>-09-12 <span class="m">18</span>:47:00,818 - DEBUG - kernel.Simulator - Using default configuration path: /home/opsim/repos/scheduler_config/config_run/
+<span class="m">2018</span>-09-12 <span class="m">18</span>:47:01,241 - DEBUG - matplotlib.backends - backend Qt5Agg version <span class="m">5</span>.9.2
+<span class="m">2018</span>-09-12 <span class="m">18</span>:47:01,537 - INFO - kernel.Simulator - Initializing simulation
+</pre></div>
+</div>
+<ul class="simple">
+<li>You can see in <code class="docutils literal"><span class="pre">line</span> <span class="pre">1</span></code> that the feature scheduler was used <code class="docutils literal"><span class="pre">INFO</span> <span class="pre">-</span> <span class="pre">root</span> <span class="pre">-</span> <span class="pre">Loading</span> <span class="pre">proposal</span> <span class="pre">driver</span></code></li>
+<li>You can also see that the same path was use for the configuration <code class="docutils literal"><span class="pre">Using</span> <span class="pre">default</span> <span class="pre">configuration</span> <span class="pre">path:</span> <span class="pre">/home/opsim/repos/scheduler_config/config_run/</span></code>.</li>
+</ul>
+</div>
+<div class="section" id="configuring-simulations">
+<h2>Configuring Simulations<a class="headerlink" href="#configuring-simulations" title="Permalink to this headline">¶</a></h2>
+<p>OpSim has recently been redesigned to read configurations from a GitHub repository
+called <code class="docutils literal"><span class="pre">scheduler_config</span></code> that can be found <a class="reference external" href="https://github.com/lsst-ts/scheduler_config/tree/master">here</a>.
+Within that repository there is a directory called <cite>config_run</cite>, which is where OpSim looks for the configuration
+for a simulation. From the two previous log files, we can see how this is set up in the docker container. OpSim
+is looking in <code class="docutils literal"><span class="pre">/home/opsim/repos/scheduler_config/config_run/</span></code> for the configuration.</p>
+<p>When using the <code class="docutils literal"><span class="pre">feature</span> <span class="pre">based</span> <span class="pre">scheduler</span></code>, OpSim is reading <code class="docutils literal"><span class="pre">feature_scheduler.py</span></code> for how
+to run the simulation. For the <code class="docutils literal"><span class="pre">proposal</span> <span class="pre">based</span> <span class="pre">scheduler</span></code>, OpSim will look in this directory
+for <code class="docutils literal"><span class="pre">PexConfig</span></code> files that correspond to individual proposals in the simulation (e.g WFD, NES, SCP).</p>
+<div class="section" id="setup-up-the-repos-for-new-configurations">
+<h3>Setup up the repos for new configurations<a class="headerlink" href="#setup-up-the-repos-for-new-configurations" title="Permalink to this headline">¶</a></h3>
+<p>We want to try a different configuration, but lets not use the <code class="docutils literal"><span class="pre">scheduler_config</span></code> repo that is built
+into the container, instead we will <code class="docutils literal"><span class="pre">eups</span> <span class="pre">declare</span></code> the cloned repo we mounted when we started the
+container.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 ~<span class="o">]</span>$ <span class="nb">cd</span> /home/opsim/my_repos/scheduler_config/
+<span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 scheduler_config<span class="o">]</span>$ eups <span class="nb">declare</span> scheduler_config -r . -t <span class="nv">$USER</span>
+<span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 scheduler_config<span class="o">]</span>$ setup scheduler_config -t <span class="nv">$USER</span>
+<span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 scheduler_config<span class="o">]</span>$ scons
+</pre></div>
+</div>
+<p>Now if you run <code class="docutils literal"><span class="pre">eups</span> <span class="pre">list</span> <span class="pre">-v</span> <span class="pre">scheduler_config</span></code> you will see the correct repo is setup.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 scheduler_config<span class="o">]</span>$ eups list -v scheduler_config
+git        /home/opsim/stack/stack/miniconda3-4.5.4-fcd27eb /home/opsim/repos/scheduler_config                      current
+tag:opsim  /home/opsim/.eups    /home/opsim/my_repos/scheduler_config                       user:opsim setup
+</pre></div>
+</div>
+<p>We are now ready to edit the configurations. From the <code class="docutils literal"><span class="pre">/home/opsim/my_repos/scheduler_config</span></code> directory,
+go ahead and make a new branch in the repo.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 scheduler_config<span class="o">]</span>$ git checkout -b my_config_test
+Switched to a new branch <span class="s1">&#39;my_config_test&#39;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Any of the edits that we are about to do in <code class="docutils literal"><span class="pre">/home/opsim/my_repos/scheduler_config</span></code> can
+either be done in the docker container terminal using <code class="docutils literal"><span class="pre">vi</span></code>, or you can edit it them using
+your favorite local editor in the <code class="docutils literal"><span class="pre">~/flatiron/my_repos</span></code> directory.</p>
+</div>
+</div>
+<div class="section" id="a-new-feature-based-configuration">
+<h3>A new feature based configuration<a class="headerlink" href="#a-new-feature-based-configuration" title="Permalink to this headline">¶</a></h3>
+<p>For the <code class="docutils literal"><span class="pre">feature</span> <span class="pre">based</span> <span class="pre">scheduler</span></code> we will edit the file <code class="docutils literal"><span class="pre">~/my_repos/scheduler_config/config_run/feature_scheduler.py</span></code>.
+If you are doing this from the inside the container edit with <code class="docutils literal"><span class="pre">vi</span></code> using the following, or edit it on your local host.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 scheduler_config<span class="o">]</span>$ vi ~/my_repos/scheduler_config/config_run/feature_scheduler.py
+</pre></div>
+</div>
+<p>For this example we will remove the deep drilling fields, the pairs survey, and we wont take any observations in the <code class="docutils literal"><span class="pre">r</span> <span class="pre">filter</span></code>.
+Edit the file to look like this and save.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">healpy</span> <span class="kn">as</span> <span class="nn">hp</span>
+<span class="kn">import</span> <span class="nn">lsst.sims.featureScheduler</span> <span class="kn">as</span> <span class="nn">fs</span>
+<span class="kn">from</span> <span class="nn">lsst.ts.scheduler.kernel</span> <span class="kn">import</span> <span class="n">SurveyTopology</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;config&#39;</span><span class="p">:</span>
+    <span class="n">survey_topology</span> <span class="o">=</span> <span class="n">SurveyTopology</span><span class="p">()</span>
+    <span class="n">survey_topology</span><span class="o">.</span><span class="n">num_general_props</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">survey_topology</span><span class="o">.</span><span class="n">general_propos</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;NorthEclipticSpur&quot;</span><span class="p">,</span> <span class="s2">&quot;SouthCelestialPole&quot;</span><span class="p">,</span> <span class="s2">&quot;WideFastDeep&quot;</span><span class="p">,</span> <span class="s2">&quot;GalacticPlane&quot;</span><span class="p">]</span>
+    <span class="n">survey_topology</span><span class="o">.</span><span class="n">num_seq_props</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">survey_topology</span><span class="o">.</span><span class="n">sequence_propos</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DeepDrillingCosmology1&quot;</span><span class="p">]</span>
+
+    <span class="n">target_maps</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">nside</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">set_default_nside</span><span class="p">(</span><span class="n">nside</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>  <span class="c1"># Required</span>
+
+    <span class="n">target_maps</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">generate_goal_map</span><span class="p">(</span><span class="n">NES_fraction</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+                                            <span class="n">WFD_fraction</span><span class="o">=</span><span class="mf">0.31</span><span class="p">,</span> <span class="n">SCP_fraction</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span>
+                                            <span class="n">GP_fraction</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">nside</span><span class="o">=</span><span class="n">nside</span><span class="p">,</span>
+                                            <span class="n">generate_id_map</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">target_maps</span><span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">generate_goal_map</span><span class="p">(</span><span class="n">NES_fraction</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                                            <span class="n">WFD_fraction</span><span class="o">=</span><span class="mf">0.44</span><span class="p">,</span> <span class="n">SCP_fraction</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span>
+                                            <span class="n">GP_fraction</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">nside</span><span class="o">=</span><span class="n">nside</span><span class="p">,</span>
+                                            <span class="n">generate_id_map</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="c1">#target_maps[&#39;r&#39;] = fs.generate_goal_map(NES_fraction=0.46,</span>
+    <span class="c1">#                                        WFD_fraction=1.0, SCP_fraction=0.15,</span>
+    <span class="c1">#                                        GP_fraction=0.15, nside=nside,</span>
+    <span class="c1">#                                        generate_id_map=True)</span>
+    <span class="n">target_maps</span><span class="p">[</span><span class="s1">&#39;i&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">generate_goal_map</span><span class="p">(</span><span class="n">NES_fraction</span><span class="o">=</span><span class="mf">0.46</span><span class="p">,</span>
+                                            <span class="n">WFD_fraction</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">SCP_fraction</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span>
+                                            <span class="n">GP_fraction</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">nside</span><span class="o">=</span><span class="n">nside</span><span class="p">,</span>
+                                            <span class="n">generate_id_map</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">target_maps</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">generate_goal_map</span><span class="p">(</span><span class="n">NES_fraction</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+                                            <span class="n">WFD_fraction</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">SCP_fraction</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span>
+                                            <span class="n">GP_fraction</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">nside</span><span class="o">=</span><span class="n">nside</span><span class="p">,</span>
+                                            <span class="n">generate_id_map</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">target_maps</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">generate_goal_map</span><span class="p">(</span><span class="n">NES_fraction</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
+                                            <span class="n">WFD_fraction</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">SCP_fraction</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span>
+                                            <span class="n">GP_fraction</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">nside</span><span class="o">=</span><span class="n">nside</span><span class="p">,</span>
+                                            <span class="n">generate_id_map</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="n">filters</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">]</span>
+    <span class="n">surveys</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">filtername</span> <span class="ow">in</span> <span class="n">filters</span><span class="p">:</span>
+        <span class="n">bfs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">bfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">M5_diff_basis_function</span><span class="p">(</span><span class="n">filtername</span><span class="o">=</span><span class="n">filtername</span><span class="p">,</span> <span class="n">nside</span><span class="o">=</span><span class="n">nside</span><span class="p">))</span>
+        <span class="n">bfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">Target_map_basis_function</span><span class="p">(</span><span class="n">filtername</span><span class="o">=</span><span class="n">filtername</span><span class="p">,</span>
+                                                <span class="n">target_map</span><span class="o">=</span><span class="n">target_maps</span><span class="p">[</span><span class="n">filtername</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                                                <span class="n">out_of_bounds_val</span><span class="o">=</span><span class="n">hp</span><span class="o">.</span><span class="n">UNSEEN</span><span class="p">,</span> <span class="n">nside</span><span class="o">=</span><span class="n">nside</span><span class="p">))</span>
+
+        <span class="n">bfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">MeridianStripeBasisFunction</span><span class="p">(</span><span class="n">nside</span><span class="o">=</span><span class="n">nside</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="p">(</span><span class="mf">8.</span><span class="p">,)))</span>
+        <span class="n">bfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">Slewtime_basis_function</span><span class="p">(</span><span class="n">filtername</span><span class="o">=</span><span class="n">filtername</span><span class="p">,</span> <span class="n">nside</span><span class="o">=</span><span class="n">nside</span><span class="p">))</span>
+        <span class="n">bfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">Strict_filter_basis_function</span><span class="p">(</span><span class="n">filtername</span><span class="o">=</span><span class="n">filtername</span><span class="p">))</span>
+        <span class="n">bfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">Avoid_Fast_Revists</span><span class="p">(</span><span class="n">filtername</span><span class="o">=</span><span class="n">filtername</span><span class="p">,</span> <span class="n">gap_min</span><span class="o">=</span><span class="mf">240.</span><span class="p">,</span> <span class="n">nside</span><span class="o">=</span><span class="n">nside</span><span class="p">))</span>
+
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">])</span>
+        <span class="c1"># surveys.append(fs.Greedy_survey_fields(bfs, weights, block_size=1, filtername=filtername, dither=False,</span>
+        <span class="c1">#                                        nside=nside, smoothing_kernel=9,</span>
+        <span class="c1">#                                        tag_fields=True, tag_map=target_maps[filtername][1]))</span>
+        <span class="n">surveys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">Greedy_survey_fields</span><span class="p">(</span><span class="n">bfs</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">block_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">filtername</span><span class="o">=</span><span class="n">filtername</span><span class="p">,</span> <span class="n">dither</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                               <span class="n">nside</span><span class="o">=</span><span class="n">nside</span><span class="p">,</span>
+                                               <span class="n">tag_fields</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                               <span class="n">tag_map</span><span class="o">=</span><span class="n">target_maps</span><span class="p">[</span><span class="n">filtername</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                                               <span class="n">tag_names</span><span class="o">=</span><span class="n">target_maps</span><span class="p">[</span><span class="n">filtername</span><span class="p">][</span><span class="mi">2</span><span class="p">]))</span>
+
+
+    <span class="n">scheduler</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">Core_scheduler</span><span class="p">(</span><span class="n">surveys</span><span class="p">,</span> <span class="n">nside</span><span class="o">=</span><span class="n">nside</span><span class="p">)</span>  <span class="c1"># Required</span>
+</pre></div>
+</div>
+<p>Now we are set to run a new feature based simulation and this configuration will be used.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 run_local<span class="o">]</span>$ <span class="nb">cd</span> ~/run_local/
+<span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 run_local<span class="o">]</span>$ opsim4 --frac-duration<span class="o">=</span><span class="m">0</span>.003
+</pre></div>
+</div>
+<p>When it is done have a look at the new log file, which should be <code class="docutils literal"><span class="pre">opsim-docker_2002.log</span></code>. You see that
+the configuration was indeed read from the mounted repository.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 run_local<span class="o">]</span>$ head -n5 opsim-docker_2002.log
+<span class="m">2018</span>-09-12 <span class="m">20</span>:17:43,187 - INFO - root - Loading feature driver
+<span class="m">2018</span>-09-12 <span class="m">20</span>:17:43,575 - DEBUG - matplotlib.backends - backend Qt5Agg version <span class="m">5</span>.9.2
+<span class="m">2018</span>-09-12 <span class="m">20</span>:17:43,951 - DEBUG - kernel.Simulator - Using default configuration path: /home/opsim/my_repos/scheduler_config/config_run/
+<span class="m">2018</span>-09-12 <span class="m">20</span>:17:44,272 - INFO - kernel.Simulator - Initializing simulation
+<span class="m">2018</span>-09-12 <span class="m">20</span>:17:44,272 - INFO - kernel.Simulator - Simulation Session <span class="nv">Id</span> <span class="o">=</span> <span class="m">2002</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 
 

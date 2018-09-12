@@ -6,10 +6,11 @@
 Getting Started with MAF and OpSim
 ==================================
 Here you will find some basic instructions for
-running MAF and OpSim using Docker containers.
+running MAF and OpSim using Docker containers. Please see Docker and Directories
+sections before starting with MAF or OpSim.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    docker
    directories

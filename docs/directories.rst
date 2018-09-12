@@ -1,7 +1,10 @@
+.. _directories:
+
 Directories and GitHub repos
 ============================
 Setting up the following directory structure, and cloning these repos, will make
-it easier to follow the tutorials provided in this documentation.
+it easier to follow the tutorials provided in this documentation. These paths
+can be changed to whatever you like, just be sure to update the examples accordingly.
 
 1. Setup what will become our top working directory ``~/flatiron``
 
@@ -11,7 +14,7 @@ it easier to follow the tutorials provided in this documentation.
    cd flatiron
    mkdir maf_local
    mkdir my_repos
-   mkdir -p run_local/output
+   mkdir -p opsimv4_data/run_local/output
 
 2. Clone the following repos into these directories
 
@@ -35,4 +38,4 @@ for additional setup steps for using docker on linux.
 
    chmod a+rw maf_local
    chmod a+rw my_repos
-   chmod a+rw run_local
+   chmod a+rw opsimv4_data

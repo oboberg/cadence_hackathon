@@ -152,9 +152,10 @@
            <div itemprop="articleBody">
             
   <div class="section" id="directories-and-github-repos">
-<h1>Directories and GitHub repos<a class="headerlink" href="#directories-and-github-repos" title="Permalink to this headline">¶</a></h1>
+<span id="directories"></span><h1>Directories and GitHub repos<a class="headerlink" href="#directories-and-github-repos" title="Permalink to this headline">¶</a></h1>
 <p>Setting up the following directory structure, and cloning these repos, will make
-it easier to follow the tutorials provided in this documentation.</p>
+it easier to follow the tutorials provided in this documentation. These paths
+can be changed to whatever you like, just be sure to update the examples accordingly.</p>
 <ol class="arabic simple">
 <li>Setup what will become our top working directory <code class="docutils literal"><span class="pre">~/flatiron</span></code></li>
 </ol>
@@ -162,7 +163,7 @@ it easier to follow the tutorials provided in this documentation.</p>
 <span class="nb">cd</span> flatiron
 mkdir maf_local
 mkdir my_repos
-mkdir -p run_local/output
+mkdir -p opsimv4_data/run_local/output
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
@@ -177,14 +178,14 @@ git clone https://github.com/lsst-ts/scheduler_config
 git clone git clone https://github.com/lsst/sims_featureScheduler.git
 </pre></div>
 </div>
-<p>3. If you are on a linux system you will need to open up the read write permissions
+<p>3. If you are on a linux system you will need to open up the read/write permissions
 of any of the local directories that will be mounted inside of docker containers.
 The for these tutorials you will need to do this for <code class="docutils literal"><span class="pre">maf_local</span></code>, <code class="docutils literal"><span class="pre">my_repos</span></code>,
 and <code class="docutils literal"><span class="pre">run_local</span></code>. Again, please see this <a class="reference external" href="https://docs.docker.com/install/linux/linux-postinstall/#next-steps/">link</a>
 for additional setup steps for using docker on linux.</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span>chmod a+rw maf_local
 chmod a+rw my_repos
-chmod a+rw run_local
+chmod a+rw opsimv4_data
 </pre></div>
 </div>
 </div>
