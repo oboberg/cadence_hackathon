@@ -96,6 +96,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#configuring-simulations">Configuring Simulations</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#setup-up-the-repos-for-new-configurations">Setup up the repos for new configurations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#a-new-feature-based-configuration">A new feature based configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-new-proposal-based-run">A new proposal based run</a></li>
 </ul>
 </li>
 </ul>
@@ -283,7 +284,7 @@ opsim-docker_2000.db  opsim-docker_2001.db  opsim-docker_sessions.db
 <div class="section" id="useful-information-in-the-logs">
 <h2>Useful information in the logs<a class="headerlink" href="#useful-information-in-the-logs" title="Permalink to this headline">¶</a></h2>
 <p>Let&#8217;s run the <code class="docutils literal"><span class="pre">head</span></code> command on the two logs to see some useful information
-about which scheduler was used, and the path the default configuration.</p>
+about which scheduler was used, and the path to the default configuration.</p>
 <ul class="simple">
 <li>First the feature based run <code class="docutils literal"><span class="pre">opsim-docker_2000</span></code></li>
 </ul>
@@ -310,7 +311,7 @@ We will come back to this in the next section.</li>
 </pre></div>
 </div>
 <ul class="simple">
-<li>You can see in <code class="docutils literal"><span class="pre">line</span> <span class="pre">1</span></code> that the feature scheduler was used <code class="docutils literal"><span class="pre">INFO</span> <span class="pre">-</span> <span class="pre">root</span> <span class="pre">-</span> <span class="pre">Loading</span> <span class="pre">proposal</span> <span class="pre">driver</span></code></li>
+<li>You can see in <code class="docutils literal"><span class="pre">line</span> <span class="pre">1</span></code> that the proposal scheduler was used <code class="docutils literal"><span class="pre">INFO</span> <span class="pre">-</span> <span class="pre">root</span> <span class="pre">-</span> <span class="pre">Loading</span> <span class="pre">proposal</span> <span class="pre">driver</span></code></li>
 <li>You can also see that the same path was use for the configuration <code class="docutils literal"><span class="pre">Using</span> <span class="pre">default</span> <span class="pre">configuration</span> <span class="pre">path:</span> <span class="pre">/home/opsim/repos/scheduler_config/config_run/</span></code>.</li>
 </ul>
 </div>
@@ -318,7 +319,7 @@ We will come back to this in the next section.</li>
 <h2>Configuring Simulations<a class="headerlink" href="#configuring-simulations" title="Permalink to this headline">¶</a></h2>
 <p>OpSim has recently been redesigned to read configurations from a GitHub repository
 called <code class="docutils literal"><span class="pre">scheduler_config</span></code> that can be found <a class="reference external" href="https://github.com/lsst-ts/scheduler_config/tree/master">here</a>.
-Within that repository there is a directory called <cite>config_run</cite>, which is where OpSim looks for the configuration
+Within that repository there is a directory called <code class="docutils literal"><span class="pre">config_run</span></code>, which is where OpSim looks for the configuration
 for a simulation. From the two previous log files, we can see how this is set up in the docker container. OpSim
 is looking in <code class="docutils literal"><span class="pre">/home/opsim/repos/scheduler_config/config_run/</span></code> for the configuration.</p>
 <p>When using the <code class="docutils literal"><span class="pre">feature</span> <span class="pre">based</span> <span class="pre">scheduler</span></code>, OpSim is reading <code class="docutils literal"><span class="pre">feature_scheduler.py</span></code> for how
@@ -326,7 +327,7 @@ to run the simulation. For the <code class="docutils literal"><span class="pre">
 for <code class="docutils literal"><span class="pre">PexConfig</span></code> files that correspond to individual proposals in the simulation (e.g WFD, NES, SCP).</p>
 <div class="section" id="setup-up-the-repos-for-new-configurations">
 <h3>Setup up the repos for new configurations<a class="headerlink" href="#setup-up-the-repos-for-new-configurations" title="Permalink to this headline">¶</a></h3>
-<p>We want to try a different configuration, but lets not use the <code class="docutils literal"><span class="pre">scheduler_config</span></code> repo that is built
+<p>We want to try a different configuration, but let&#8217;s not use the <code class="docutils literal"><span class="pre">scheduler_config</span></code> repo that is built
 into the container, instead we will <code class="docutils literal"><span class="pre">eups</span> <span class="pre">declare</span></code> the cloned repo we mounted when we started the
 container.</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 ~<span class="o">]</span>$ <span class="nb">cd</span> /home/opsim/my_repos/scheduler_config/
@@ -357,11 +358,11 @@ your favorite local editor in the <code class="docutils literal"><span class="pr
 <div class="section" id="a-new-feature-based-configuration">
 <h3>A new feature based configuration<a class="headerlink" href="#a-new-feature-based-configuration" title="Permalink to this headline">¶</a></h3>
 <p>For the <code class="docutils literal"><span class="pre">feature</span> <span class="pre">based</span> <span class="pre">scheduler</span></code> we will edit the file <code class="docutils literal"><span class="pre">~/my_repos/scheduler_config/config_run/feature_scheduler.py</span></code>.
-If you are doing this from the inside the container edit with <code class="docutils literal"><span class="pre">vi</span></code> using the following, or edit it on your local host.</p>
+If you are doing this from the inside the container edit with <code class="docutils literal"><span class="pre">vi</span></code>, use the following, or edit it on your local host.</p>
 <div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 scheduler_config<span class="o">]</span>$ vi ~/my_repos/scheduler_config/config_run/feature_scheduler.py
 </pre></div>
 </div>
-<p>For this example we will remove the deep drilling fields, the pairs survey, and we wont take any observations in the <code class="docutils literal"><span class="pre">r</span> <span class="pre">filter</span></code>.
+<p>For this example we will remove the deep drilling fields, the pairs survey, and we won&#8217;t take any observations in the <code class="docutils literal"><span class="pre">r</span> <span class="pre">filter</span></code>.
 Edit the file to look like this and save.</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">healpy</span> <span class="kn">as</span> <span class="nn">hp</span>
@@ -447,6 +448,80 @@ the configuration was indeed read from the mounted repository.</p>
 <span class="m">2018</span>-09-12 <span class="m">20</span>:17:44,272 - INFO - kernel.Simulator - Simulation Session <span class="nv">Id</span> <span class="o">=</span> <span class="m">2002</span>
 </pre></div>
 </div>
+<p>If you want to check that no observations were take in <code class="docutils literal"><span class="pre">r</span></code> you can quickly do so wtih <code class="docutils literal"><span class="pre">sqlite3</span></code>.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 output<span class="o">]</span>$ <span class="nb">cd</span> ~/run_local/output/
+<span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 output<span class="o">]</span>$ sqlite3 opsim-docker_2002.db
+SQLite version <span class="m">3</span>.23.1 <span class="m">2018</span>-04-10 <span class="m">17</span>:39:29
+Enter <span class="s2">&quot;.help&quot;</span> <span class="k">for</span> usage hints.
+sqlite&gt; sqlite&gt; <span class="k">select</span> * from summaryallprops where <span class="nv">filter</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">;</span>
+sqlite&gt; .exit
+<span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 output<span class="o">]</span>$
+</pre></div>
+</div>
+<p>This query will return nothing. For contrast, try the same thing with the first feature based run
+(<code class="docutils literal"><span class="pre">opsim-docker_2002.db</span></code>) that used the default configuration.</p>
+</div>
+<div class="section" id="a-new-proposal-based-run">
+<h3>A new proposal based run<a class="headerlink" href="#a-new-proposal-based-run" title="Permalink to this headline">¶</a></h3>
+<p>For proposal based runs there is not a single file that we edit, but rather a series
+of <code class="docutils literal"><span class="pre">PexConfig</span></code> python files. For this example we will configure the simulation
+to only do the Wide Fast Deep (WFD) area, plus deep drilling, and do single <code class="docutils literal"><span class="pre">30</span></code> second snaps, instead
+of two <code class="docutils literal"><span class="pre">15</span></code> second snaps.</p>
+<p>First we will edit the <code class="docutils literal"><span class="pre">vi</span> <span class="pre">~/my_repos/scheduler_config/config_run/survey.py</span></code> file already in the repository so it only includes WFD.
+This is easily done by adding this line <code class="docutils literal"><span class="pre">config.general_proposals=['WideFastDeep']</span></code> to the end of the file.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This is an example configuration for some of the basic parameters for simulations.</span>
+
+<span class="sd">07/2018 - Version 0</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">lsst.ts.schedulerConfig.survey</span>
+<span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">==</span><span class="n">lsst</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">schedulerConfig</span><span class="o">.</span><span class="n">survey</span><span class="o">.</span><span class="n">Survey</span><span class="p">,</span> <span class="s1">&#39;config is of type </span><span class="si">%s</span><span class="s1">.</span><span class="si">%s</span><span class="s1"> instead of lsst.ts.schedulerConfig.survey.Survey&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="c1"># The delay (units=seconds) to skip the simulation time forward when not receiving a target.</span>
+<span class="n">config</span><span class="o">.</span><span class="n">idle_delay</span><span class="o">=</span><span class="mf">60.0</span>
+
+<span class="c1"># The start date (format=YYYY-MM-DD) of the survey.</span>
+<span class="n">config</span><span class="o">.</span><span class="n">start_date</span><span class="o">=</span><span class="s1">&#39;2022-10-01&#39;</span>
+
+<span class="c1"># The fractional duration (units=years) of the survey.</span>
+<span class="n">config</span><span class="o">.</span><span class="n">duration</span><span class="o">=</span><span class="mf">10.0</span>
+
+<span class="n">config</span><span class="o">.</span><span class="n">general_proposals</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;WideFastDeep&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>To edit the snaps we will need to create a new file called <code class="docutils literal"><span class="pre">widefastdeep_prop.py</span></code> in
+<code class="docutils literal"><span class="pre">~/my_repos/scheduler_config/config_run/</span></code>. Here we will do this with <code class="docutils literal"><span class="pre">touch</span></code>.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 config_run<span class="o">]</span>$ touch widefastdeep_prop.py
+</pre></div>
+</div>
+<p>Then edit that file to contain the following</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">lsst.ts.schedulerConfig.science.wide_fast_deep</span>
+<span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">==</span><span class="n">lsst</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">schedulerConfig</span><span class="o">.</span><span class="n">science</span><span class="o">.</span><span class="n">wide_fast_deep</span><span class="o">.</span><span class="n">WideFastDeep</span><span class="p">,</span> <span class="s1">&#39;config is of type </span><span class="si">%s</span><span class="s1">.</span><span class="si">%s</span><span class="s1"> instead of lsst.ts.schedulerConfig.science.wide_fast_deep.WideFastDeep&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">filters</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">exposures</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span>
+<span class="n">config</span><span class="o">.</span><span class="n">filters</span><span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">exposures</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span>
+<span class="n">config</span><span class="o">.</span><span class="n">filters</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">exposures</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span>
+<span class="n">config</span><span class="o">.</span><span class="n">filters</span><span class="p">[</span><span class="s1">&#39;i&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">exposures</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span>
+<span class="n">config</span><span class="o">.</span><span class="n">filters</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">exposures</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span>
+<span class="n">config</span><span class="o">.</span><span class="n">filters</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">exposures</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Now <code class="docutils literal"><span class="pre">cd</span></code> back to <code class="docutils literal"><span class="pre">~/run_local</span></code> and start a one night simulation.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 run_local<span class="o">]</span>$ opsim4 --frac-duration<span class="o">=</span><span class="m">0</span>.003 --scheduler proposal
+</pre></div>
+</div>
+<p>We will use <code class="docutils literal"><span class="pre">sqlite3</span></code> again to illustrate that the configuration worked.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 run_local<span class="o">]</span> <span class="nb">cd</span> ~/run_local/output
+<span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 output<span class="o">]</span>$ cp opsim-docker_2006.db opsim-docker_2003.db
+<span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 output<span class="o">]</span>$ sqlite3 opsim-docker_2003.db
+SQLite version <span class="m">3</span>.23.1 <span class="m">2018</span>-04-10 <span class="m">17</span>:39:29
+Enter <span class="s2">&quot;.help&quot;</span> <span class="k">for</span> usage hints.
+sqlite&gt; <span class="k">select</span> * from Proposal<span class="p">;</span>
+<span class="m">1</span><span class="p">|</span><span class="m">2003</span><span class="p">|</span>WideFastDeep<span class="p">|</span>General
+<span class="m">2</span><span class="p">|</span><span class="m">2003</span><span class="p">|</span>DeepDrillingCosmology1<span class="p">|</span>Sequence
+sqlite&gt; .exit
+</pre></div>
+</div>
+<p>As you can see only <code class="docutils literal"><span class="pre">WideFastDeep</span></code> and <code class="docutils literal"><span class="pre">DeepDrillingCosmology1</span></code> are present
+in the <code class="docutils literal"><span class="pre">Proposal</span></code> table.</p>
 </div>
 </div>
 </div>

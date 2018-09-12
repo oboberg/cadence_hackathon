@@ -138,7 +138,7 @@ have been produced. Also note that the run number increased from ``2000`` to ``2
 Useful information in the logs
 ++++++++++++++++++++++++++++++
 Let's run the ``head`` command on the two logs to see some useful information
-about which scheduler was used, and the path the default configuration.
+about which scheduler was used, and the path to the default configuration.
 
 - First the feature based run ``opsim-docker_2000``
 
@@ -166,7 +166,7 @@ about which scheduler was used, and the path the default configuration.
     2018-09-12 18:47:01,241 - DEBUG - matplotlib.backends - backend Qt5Agg version 5.9.2
     2018-09-12 18:47:01,537 - INFO - kernel.Simulator - Initializing simulation
 
-- You can see in ``line 1`` that the feature scheduler was used ``INFO - root - Loading proposal driver``
+- You can see in ``line 1`` that the proposal scheduler was used ``INFO - root - Loading proposal driver``
 - You can also see that the same path was use for the configuration ``Using default configuration path: /home/opsim/repos/scheduler_config/config_run/``.
 
 
@@ -176,7 +176,7 @@ Configuring Simulations
 
 OpSim has recently been redesigned to read configurations from a GitHub repository
 called ``scheduler_config`` that can be found `here <https://github.com/lsst-ts/scheduler_config/tree/master>`_.
-Within that repository there is a directory called `config_run`, which is where OpSim looks for the configuration
+Within that repository there is a directory called ``config_run``, which is where OpSim looks for the configuration
 for a simulation. From the two previous log files, we can see how this is set up in the docker container. OpSim
 is looking in ``/home/opsim/repos/scheduler_config/config_run/`` for the configuration.
 
@@ -186,7 +186,7 @@ for ``PexConfig`` files that correspond to individual proposals in the simulatio
 
 Setup up the repos for new configurations
 -----------------------------------------
-We want to try a different configuration, but lets not use the ``scheduler_config`` repo that is built
+We want to try a different configuration, but let's not use the ``scheduler_config`` repo that is built
 into the container, instead we will ``eups declare`` the cloned repo we mounted when we started the
 container.
 
@@ -222,13 +222,13 @@ go ahead and make a new branch in the repo.
 A new feature based configuration
 ---------------------------------
 For the ``feature based scheduler`` we will edit the file ``~/my_repos/scheduler_config/config_run/feature_scheduler.py``.
-If you are doing this from the inside the container edit with ``vi`` using the following, or edit it on your local host.
+If you are doing this from the inside the container edit with ``vi``, use the following, or edit it on your local host.
 
 .. code-block:: bash
 
     (lsst-scipipe-fcd27eb) [opsim@9d54f5d124e1 scheduler_config]$ vi ~/my_repos/scheduler_config/config_run/feature_scheduler.py
 
-For this example we will remove the deep drilling fields, the pairs survey, and we wont take any observations in the ``r filter``.
+For this example we will remove the deep drilling fields, the pairs survey, and we won't take any observations in the ``r filter``.
 Edit the file to look like this and save.
 
 .. code-block:: python
@@ -319,3 +319,92 @@ the configuration was indeed read from the mounted repository.
     2018-09-12 20:17:43,951 - DEBUG - kernel.Simulator - Using default configuration path: /home/opsim/my_repos/scheduler_config/config_run/
     2018-09-12 20:17:44,272 - INFO - kernel.Simulator - Initializing simulation
     2018-09-12 20:17:44,272 - INFO - kernel.Simulator - Simulation Session Id = 2002
+
+If you want to check that no observations were take in ``r`` you can quickly do so wtih ``sqlite3``.
+
+.. code-block:: bash
+
+    (lsst-scipipe-fcd27eb) [opsim@9d54f5d124e1 output]$ cd ~/run_local/output/
+    (lsst-scipipe-fcd27eb) [opsim@9d54f5d124e1 output]$ sqlite3 opsim-docker_2002.db
+    SQLite version 3.23.1 2018-04-10 17:39:29
+    Enter ".help" for usage hints.
+    sqlite> sqlite> select * from summaryallprops where filter = 'r';
+    sqlite> .exit
+    (lsst-scipipe-fcd27eb) [opsim@9d54f5d124e1 output]$
+
+This query will return nothing. For contrast, try the same thing with the first feature based run
+(``opsim-docker_2002.db``) that used the default configuration.
+
+
+A new proposal based run
+------------------------
+For proposal based runs there is not a single file that we edit, but rather a series
+of ``PexConfig`` python files. For this example we will configure the simulation
+to only do the Wide Fast Deep (WFD) area, plus deep drilling, and do single ``30`` second snaps, instead
+of two ``15`` second snaps.
+
+First we will edit the ``vi ~/my_repos/scheduler_config/config_run/survey.py`` file already in the repository so it only includes WFD.
+This is easily done by adding this line ``config.general_proposals=['WideFastDeep']`` to the end of the file.
+
+.. code-block:: python
+
+    """
+    This is an example configuration for some of the basic parameters for simulations.
+
+    07/2018 - Version 0
+    """
+    import lsst.ts.schedulerConfig.survey
+    assert type(config)==lsst.ts.schedulerConfig.survey.Survey, 'config is of type %s.%s instead of lsst.ts.schedulerConfig.survey.Survey' % (type(config).__module__, type(config).__name__)
+    # The delay (units=seconds) to skip the simulation time forward when not receiving a target.
+    config.idle_delay=60.0
+
+    # The start date (format=YYYY-MM-DD) of the survey.
+    config.start_date='2022-10-01'
+
+    # The fractional duration (units=years) of the survey.
+    config.duration=10.0
+
+    config.general_proposals=['WideFastDeep']
+
+To edit the snaps we will need to create a new file called ``widefastdeep_prop.py`` in
+``~/my_repos/scheduler_config/config_run/``. Here we will do this with ``touch``.
+
+.. code-block:: bash
+
+    (lsst-scipipe-fcd27eb) [opsim@9d54f5d124e1 config_run]$ touch widefastdeep_prop.py
+
+Then edit that file to contain the following
+
+.. code-block:: python
+
+    import lsst.ts.schedulerConfig.science.wide_fast_deep
+    assert type(config)==lsst.ts.schedulerConfig.science.wide_fast_deep.WideFastDeep, 'config is of type %s.%s instead of lsst.ts.schedulerConfig.science.wide_fast_deep.WideFastDeep' % (type(config).__module__, type(config).__name__)
+    config.filters['u'].exposures=[30]
+    config.filters['g'].exposures=[30]
+    config.filters['r'].exposures=[30]
+    config.filters['i'].exposures=[30]
+    config.filters['z'].exposures=[30]
+    config.filters['y'].exposures=[30]
+
+Now ``cd`` back to ``~/run_local`` and start a one night simulation.
+
+.. code-block:: bash
+
+   (lsst-scipipe-fcd27eb) [opsim@9d54f5d124e1 run_local]$ opsim4 --frac-duration=0.003 --scheduler proposal
+
+We will use ``sqlite3`` again to illustrate that the configuration worked.
+
+.. code-block:: bash
+
+    (lsst-scipipe-fcd27eb) [opsim@9d54f5d124e1 run_local] cd ~/run_local/output
+    (lsst-scipipe-fcd27eb) [opsim@9d54f5d124e1 output]$ cp opsim-docker_2006.db opsim-docker_2003.db
+    (lsst-scipipe-fcd27eb) [opsim@9d54f5d124e1 output]$ sqlite3 opsim-docker_2003.db
+    SQLite version 3.23.1 2018-04-10 17:39:29
+    Enter ".help" for usage hints.
+    sqlite> select * from Proposal;
+    1|2003|WideFastDeep|General
+    2|2003|DeepDrillingCosmology1|Sequence
+    sqlite> .exit
+
+As you can see only ``WideFastDeep`` and ``DeepDrillingCosmology1`` are present
+in the ``Proposal`` table.
