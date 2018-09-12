@@ -97,8 +97,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#setup-up-the-repos-for-new-configurations">Setup up the repos for new configurations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#a-new-feature-based-configuration">A new feature based configuration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#a-new-proposal-based-run">A new proposal based run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#switching-back-to-the-defaults">Switching back to the defaults</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#quitting-the-container">Quitting the container</a></li>
 </ul>
 </li>
 </ul>
@@ -523,6 +525,25 @@ sqlite&gt; .exit
 <p>As you can see only <code class="docutils literal"><span class="pre">WideFastDeep</span></code> and <code class="docutils literal"><span class="pre">DeepDrillingCosmology1</span></code> are present
 in the <code class="docutils literal"><span class="pre">Proposal</span></code> table.</p>
 </div>
+<div class="section" id="switching-back-to-the-defaults">
+<h3>Switching back to the defaults<a class="headerlink" href="#switching-back-to-the-defaults" title="Permalink to this headline">¶</a></h3>
+<p>To switch back to the default configurations we can use <code class="docutils literal"><span class="pre">eups</span></code>.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 output<span class="o">]</span>$ eups list -v scheduler_config
+git        /home/opsim/stack/stack/miniconda3-4.5.4-fcd27eb /home/opsim/repos/scheduler_config current setup
+tag:opsim  /home/opsim/.eups    /home/opsim/my_repos/scheduler_config
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="quitting-the-container">
+<h2>Quitting the container<a class="headerlink" href="#quitting-the-container" title="Permalink to this headline">¶</a></h2>
+<p>To quit the container simply type <code class="docutils literal"><span class="pre">exit</span></code> at the command promt.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="o">(</span>lsst-scipipe-fcd27eb<span class="o">)</span> <span class="o">[</span>opsim@9d54f5d124e1 ~<span class="o">]</span> <span class="nb">exit</span>
+</pre></div>
+</div>
+<p>Since we started the container with the <code class="docutils literal"><span class="pre">--rm</span></code> flag it will be deleted as soon
+as we exit. Therefore only edits and output in the mounted directories will be
+saved on your local host.</p>
 </div>
 </div>
 

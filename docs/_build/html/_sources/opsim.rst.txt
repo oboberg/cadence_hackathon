@@ -408,3 +408,26 @@ We will use ``sqlite3`` again to illustrate that the configuration worked.
 
 As you can see only ``WideFastDeep`` and ``DeepDrillingCosmology1`` are present
 in the ``Proposal`` table.
+
+Switching back to the defaults
+------------------------------
+To switch back to the default configurations we can use ``eups``.
+
+.. code-block:: bash
+
+    (lsst-scipipe-fcd27eb) [opsim@9d54f5d124e1 output]$ eups list -v scheduler_config
+    git        /home/opsim/stack/stack/miniconda3-4.5.4-fcd27eb /home/opsim/repos/scheduler_config current setup
+    tag:opsim  /home/opsim/.eups    /home/opsim/my_repos/scheduler_config
+
+++++++++++++++++++++++
+Quitting the container
+++++++++++++++++++++++
+To quit the container simply type ``exit`` at the command promt.
+
+.. code-block:: bash
+
+    (lsst-scipipe-fcd27eb) [opsim@9d54f5d124e1 ~] exit
+
+Since we started the container with the ``--rm`` flag it will be deleted as soon
+as we exit. Therefore only edits and output in the mounted directories will be
+saved on your local host.
