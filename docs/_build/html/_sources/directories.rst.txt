@@ -22,9 +22,9 @@ can be changed to whatever you like, just be sure to update the examples accordi
 
    cd maf_local
    git clone https://github.com/LSST-nonproject/sims_maf_contrib.git
-   git clone https://github.com/lsst/sims_maf.git
    cd ..
    cd my_repos
+   git clone https://github.com/lsst/sims_maf.git
    git clone https://github.com/lsst-ts/scheduler_config
    git clone git clone https://github.com/lsst/sims_featureScheduler.git
 
