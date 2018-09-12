@@ -320,7 +320,7 @@ the configuration was indeed read from the mounted repository.
     2018-09-12 20:17:44,272 - INFO - kernel.Simulator - Initializing simulation
     2018-09-12 20:17:44,272 - INFO - kernel.Simulator - Simulation Session Id = 2002
 
-If you want to check that no observations were take in ``r`` you can quickly do so wtih ``sqlite3``.
+If you want to check that no observations were taken in ``r`` you can quickly do so wtih ``sqlite3``.
 
 .. code-block:: bash
 
