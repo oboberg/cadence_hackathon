@@ -222,7 +222,7 @@ go ahead and make a new branch in the repo.
 A new feature based configuration
 ---------------------------------
 For the ``feature based scheduler`` we will edit the file ``~/my_repos/scheduler_config/config_run/feature_scheduler.py``.
-If you are doing this from the inside the container edit with ``vi``, use the following, or edit it on your local host.
+If you are doing this from the inside the container with ``vi``, use the following, or edit it on your local host.
 
 .. code-block:: bash
 
