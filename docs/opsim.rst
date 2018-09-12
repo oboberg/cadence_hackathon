@@ -32,7 +32,8 @@ Breakdown of command:
  - ``docker run`` run a docker container
  - ``-it`` Give me an an interactive shell in the container
  - ``--rm`` remove the container after it is stopped
- - ``-v ${PWD}/opsimv4_data/run_local`` mounts the local `run_dir` into the container at the path ``/home/opsim/run_local``.
+ - ``-v ${PWD}/opsimv4_data/run_local`` mounts the local ``run_dir`` into the container at the path ``/home/opsim/run_local``.
+ - ``-v ${PWD}/my_repos`` mounts the local ``my_repos`` into the container at the path ``/home/opsim/my_repos``.
  - ``-e OPSIM_HOSTNAME=opsim-docker`` sets the ``OPSIM_HOSTNAME`` environment variable inside the container. This sets the name of the run tracking database and other output files. You can change this to whatever name you like.
  - ``-p 8888:8888`` this is read as ``port on host:port on container``. Meaning port ``8888`` in the container will be fed to port ``8888`` on your local host.This allows you to use things like ``jupyter lab``.
  - ``oboberg/opsim4_fbs_py3:latest`` this is the name of the docker image. If you don't already have it from doing ``docker pull oboberg/opsim4_fbs_py3:latest``, it will automatically be pulled.
