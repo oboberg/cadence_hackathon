@@ -17,3 +17,4 @@ sections before starting with MAF or OpSim.
    maf
    opsim
    notebooks/index
+   current_runs

@@ -1,0 +1,1055 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Information on currently available OpSim runs &mdash; Hackathon Demos 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Feature Based Scheduler run with SOCS and custom scheduler configuration" href="notebooks/complex_fbs_with_socs.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Hackathon Demos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="docker.html">Docker installation and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="directories.html">Directories and GitHub repos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maf.html">MAF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opsim.html">OpSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/index.html">Feature Based Scheduler Jupyter Notebooks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Information on currently available OpSim runs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Total-visits">Total visits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#CoaddM5-in-WFD">CoaddM5 in WFD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fO-in-WFD">fO in WFD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Proper-Motion-Error-in-WFD">Proper Motion Error in WFD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Parallax-Error-in-WFD">Parallax Error in WFD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Rapid-Revisit-in-WFD">Rapid Revisit in WFD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Fraction-spent-in-WFD">Fraction spent in WFD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Median-Inter-Night-Gap-in-WFD-(per-filter)">Median Inter-Night Gap in WFD (per filter)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Median-Inter-Night-Gap-in-WFD-(all-filters)">Median Inter-Night Gap in WFD (all filters)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#HA-histograms">HA histograms</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Hackathon Demos</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Information on currently available OpSim runs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/current_runs.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="Information-on-currently-available-OpSim-runs">
+<h1>Information on currently available OpSim runs<a class="headerlink" href="#Information-on-currently-available-OpSim-runs" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>See <a class="reference external" href="http://astro-lsst-01.astro.washington.edu:8080/">http://astro-lsst-01.astro.washington.edu:8080/</a> for full MAF
+output.</li>
+<li>See
+<a class="reference external" href="https://github.com/lsst-pst/survey_strategy/blob/master/WPruns/comparisons/AlternateStrategiesComparison.md">https://github.com/lsst-pst/survey_strategy/blob/master/WPruns/comparisons/AlternateStrategiesComparison.md</a>
+for additional comaprisons of available runs.</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="43%" />
+<col width="57%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Run name</th>
+<th class="head">Note</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>baseline2018a</td>
+<td>Current opsimv4 baseline</td>
+</tr>
+<tr class="row-odd"><td>kraken_2026</td>
+<td>Python 3 baseline2018a replacement
+(with dome crawl and OL)</td>
+</tr>
+<tr class="row-even"><td>colossus_2665</td>
+<td>Python 3 baseline2018a replacement
+(with dome crawl and OL), WFD area
+increased by 1.5 degrees north an
+south</td>
+</tr>
+<tr class="row-odd"><td>pontus_2002</td>
+<td>Simulation of a PanSTARRs like survey</td>
+</tr>
+<tr class="row-even"><td>colossus_2664</td>
+<td>WFD cadence in GP. GP proposal turned
+off</td>
+</tr>
+<tr class="row-odd"><td>colossus_2667</td>
+<td>Single visits per night survey</td>
+</tr>
+<tr class="row-even"><td>pontus_2489</td>
+<td>“Many visits” 20s visits with single
+snap, 40s visits in u band</td>
+</tr>
+<tr class="row-odd"><td>kraken_2035</td>
+<td>9 Deep Drilling Fields (DDFs), 4
+already decided + 5 additional</td>
+</tr>
+<tr class="row-even"><td>mothra_2045</td>
+<td>2 alternating Dec bands switched
+every other year, WFD off</td>
+</tr>
+<tr class="row-odd"><td>pontus_2502</td>
+<td>2 alternating Dec bands switched
+every other year, WFD on at 25% level</td>
+</tr>
+<tr class="row-even"><td>kraken_2036</td>
+<td>Full WFD first and last 2 years, 3
+alternating dec bands in between</td>
+</tr>
+<tr class="row-odd"><td>kraken_2042</td>
+<td>Single 30 second snaps in all filters</td>
+</tr>
+<tr class="row-even"><td>kraken_2044</td>
+<td>Simulation of a PanSTARRs like
+survey, no pairs</td>
+</tr>
+<tr class="row-odd"><td>mothra_2049</td>
+<td>Simulation of a PanSTARRs like
+survey, 2 alternating Dec bands
+switched every other year</td>
+</tr>
+<tr class="row-even"><td>nexus_2097</td>
+<td>Simulation of a PanSTARRs like
+survey, Full WFD first and last 2
+years, 3 alternating dec bands in
+between</td>
+</tr>
+<tr class="row-odd"><td>astro-lsst-01_2039</td>
+<td>No North Ecliptic Spur (NES) proposal</td>
+</tr>
+</tbody>
+</table>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="c1"># import lsst.syseng.throughputs as st</span>
+<span class="kn">import</span> <span class="nn">lsst.sims.maf.db</span> <span class="kn">as</span> <span class="nn">db</span>
+<span class="kn">import</span> <span class="nn">lsst.sims.maf.runComparison</span> <span class="kn">as</span> <span class="nn">rc</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+/astro/users/oboberg/userRepos/sims_maf/python/lsst/sims/maf/runComparison/runComparison.py:25: UserWarning:
+The generateDiffHtml method requires bokeh to be installed
+but it is not needed to use the other methods in this class.
+Run: pip install bokeh then restart your jupyter notebook kernel.
+  &#39;Run: pip install bokeh then restart your jupyter notebook kernel.&#39;)
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">filterlist</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">filtercolors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;u&#39;</span><span class="p">:</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">:</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">:</span><span class="s1">&#39;g&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;i&#39;</span><span class="p">:</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="s1">&#39;m&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">runlist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;baseline2018a&#39;</span><span class="p">,</span> <span class="s1">&#39;kraken_2026&#39;</span><span class="p">,</span> <span class="s1">&#39;colossus_2665&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;colossus_2664&#39;</span><span class="p">,</span> <span class="s1">&#39;astro-lsst-01_2039&#39;</span><span class="p">,</span><span class="s1">&#39;colossus_2667&#39;</span><span class="p">,</span> <span class="s1">&#39;pontus_2489&#39;</span><span class="p">,</span> <span class="s1">&#39;kraken_2042&#39;</span><span class="p">,</span> <span class="s1">&#39;kraken_2035&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;mothra_2045&#39;</span><span class="p">,</span> <span class="s1">&#39;pontus_2502&#39;</span><span class="p">,</span> <span class="s1">&#39;kraken_2036&#39;</span><span class="p">,</span> <span class="s1">&#39;pontus_2002&#39;</span><span class="p">,</span> <span class="s1">&#39;kraken_2044&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;mothra_2049&#39;</span><span class="p">,</span> <span class="s1">&#39;nexus_2097&#39;</span><span class="p">]</span>
+<span class="n">rundirs</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="o">+</span> <span class="s1">&#39;/all_combine&#39;</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">runlist</span><span class="p">]</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">rc</span><span class="o">.</span><span class="n">RunComparison</span><span class="p">(</span><span class="n">baseDir</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">runlist</span><span class="o">=</span><span class="n">runlist</span><span class="p">,</span> <span class="n">rundirs</span><span class="o">=</span><span class="n">rundirs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Total-visits">
+<h2>Total visits<a class="headerlink" href="#Total-visits" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">m</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">buildMetricDict</span><span class="p">(</span><span class="n">metricNameLike</span><span class="o">=</span><span class="s1">&#39;Nvisits&#39;</span><span class="p">,</span> <span class="n">metricMetadataLike</span><span class="o">=</span><span class="s1">&#39;All props&#39;</span><span class="p">,</span> <span class="n">slicerNameLike</span><span class="o">=</span><span class="s1">&#39;Unislicer&#39;</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">addSummaryStats</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">rx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">runlist</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rx</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">summaryStats</span><span class="p">[</span><span class="s1">&#39;Nvisits All props&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">100000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rx</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">runlist</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Total visits (millions)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
+<span class="n">base</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">summaryStats</span><span class="p">[</span><span class="s1">&#39;Nvisits All props&#39;</span><span class="p">][</span><span class="s1">&#39;kraken_2026&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">100000</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">summaryStats</span><span class="p">[</span><span class="s1">&#39;Nvisits All props&#39;</span><span class="p">][</span><span class="s1">&#39;kraken_2042&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">r</span><span class="o">.</span><span class="n">summaryStats</span><span class="p">[</span><span class="s1">&#39;Nvisits All props&#39;</span><span class="p">][</span><span class="s1">&#39;kraken_2026&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1.07012050584
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/current_runs_8_1.png" src="_images/current_runs_8_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="CoaddM5-in-WFD">
+<h2>CoaddM5 in WFD<a class="headerlink" href="#CoaddM5-in-WFD" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filterlist</span><span class="p">:</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="s1">&#39;WFD </span><span class="si">%s</span><span class="s1"> band&#39;</span> <span class="o">%</span> <span class="n">f</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">buildMetricDict</span><span class="p">(</span><span class="n">metricNameLike</span><span class="o">=</span><span class="s1">&#39;CoaddM5&#39;</span><span class="p">,</span>  <span class="n">metricMetadataLike</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">addSummaryStats</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filterlist</span><span class="p">:</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="s1">&#39;WFD </span><span class="si">%s</span><span class="s1"> band&#39;</span> <span class="o">%</span> <span class="n">f</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">summaryStats</span><span class="p">[</span><span class="s1">&#39;Median CoaddM5 </span><span class="si">%s</span><span class="s1"> HealpixSlicer&#39;</span> <span class="o">%</span> <span class="n">metadata</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rx</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rx</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">runlist</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Median WFD Coadded depth&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">fancybox</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;large&#39;</span><span class="p">)</span>
+<span class="c1">#base = r.summaryStats[&#39;Nvisits All props&#39;][&#39;kraken_2026&#39;]/100000</span>
+<span class="c1">#plt.axhline(base, color=&#39;r&#39;, linestyle=&#39;:&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/current_runs_11_0.png" src="_images/current_runs_11_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="fO-in-WFD">
+<h2>fO in WFD<a class="headerlink" href="#fO-in-WFD" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="c1"># SRD metrics:</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">buildMetricDict</span><span class="p">(</span><span class="n">metricNameLike</span><span class="o">=</span><span class="s1">&#39;fO&#39;</span><span class="p">,</span> <span class="n">metricMetadataLike</span><span class="o">=</span><span class="s1">&#39;WFD&#39;</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">addSummaryStats</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">fostats</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;fONv MedianNvis&#39;</span><span class="p">,</span> <span class="s1">&#39;fOArea&#39;</span><span class="p">]</span>
+<span class="n">base</span> <span class="o">=</span> <span class="p">[</span><span class="mi">825</span><span class="p">,</span> <span class="mi">18000</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fostats</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">summaryStats</span><span class="p">[</span><span class="n">f</span> <span class="o">+</span> <span class="s1">&#39; fO WFD HealpixSlicer&#39;</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rx</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rx</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">runlist</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">f</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
+    <span class="c1">#plt.legend(loc=&#39;right&#39;, fancybox=True, shadow=True, fontsize=&#39;large&#39;)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/current_runs_14_0.png" src="_images/current_runs_14_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/current_runs_14_1.png" src="_images/current_runs_14_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Proper-Motion-Error-in-WFD">
+<h2>Proper Motion Error in WFD<a class="headerlink" href="#Proper-Motion-Error-in-WFD" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="c1"># SRD metrics:</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">buildMetricDict</span><span class="p">(</span><span class="n">metricNameLike</span><span class="o">=</span><span class="s1">&#39;Proper Motion Error&#39;</span><span class="p">,</span> <span class="n">metricMetadataLike</span><span class="o">=</span><span class="s1">&#39;WFD&#39;</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">addSummaryStats</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">pm</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Median Proper Motion Error @ 24.0&#39;</span><span class="p">,</span> <span class="s1">&#39;Median Proper Motion Error @ 20.5&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">pm</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">summaryStats</span><span class="p">[</span><span class="n">f</span> <span class="o">+</span> <span class="s1">&#39; WFD HealpixSlicer&#39;</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rx</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rx</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">runlist</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Proper Motion Error&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">fancybox</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;large&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/current_runs_17_0.png" src="_images/current_runs_17_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Parallax-Error-in-WFD">
+<h2>Parallax Error in WFD<a class="headerlink" href="#Parallax-Error-in-WFD" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="c1"># SRD metrics:</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">buildMetricDict</span><span class="p">(</span><span class="n">metricNameLike</span><span class="o">=</span><span class="s1">&#39;Parallax Error&#39;</span><span class="p">,</span> <span class="n">metricMetadataLike</span><span class="o">=</span><span class="s1">&#39;WFD&#39;</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">addSummaryStats</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">pm</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Median Parallax Error @ 24.0&#39;</span><span class="p">,</span> <span class="s1">&#39;Median Parallax Error @ 22.4&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">pm</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">summaryStats</span><span class="p">[</span><span class="n">f</span> <span class="o">+</span> <span class="s1">&#39; WFD HealpixSlicer&#39;</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rx</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rx</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">runlist</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Parallax Error&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">fancybox</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;large&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/current_runs_20_0.png" src="_images/current_runs_20_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Rapid-Revisit-in-WFD">
+<h2>Rapid Revisit in WFD<a class="headerlink" href="#Rapid-Revisit-in-WFD" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="c1"># SRD metrics:</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">buildMetricDict</span><span class="p">(</span><span class="n">metricNameLike</span><span class="o">=</span><span class="s1">&#39;RapidRevisit&#39;</span><span class="p">,</span> <span class="n">metricMetadataLike</span><span class="o">=</span><span class="s1">&#39;WFD&#39;</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">addSummaryStats</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">summaryStats</span><span class="p">[</span><span class="s1">&#39;Area (sq deg) RapidRevisits WFD HealpixSlicer&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rx</span><span class="p">,</span> <span class="n">s</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rx</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">runlist</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Rapid Revisit Area (1000&#39;s sq deg)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
+<span class="c1">#plt.legend(loc=&#39;upper left&#39;, fancybox=True, shadow=True, fontsize=&#39;large&#39;)</span>
+<span class="c1">#plt.axhline(2000, color=&#39;k&#39;, linestyle=&#39;:&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/current_runs_23_0.png" src="_images/current_runs_23_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Fraction-spent-in-WFD">
+<h2>Fraction spent in WFD<a class="headerlink" href="#Fraction-spent-in-WFD" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="c1"># Fraction of time spent on WFD?</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">buildMetricDict</span><span class="p">(</span><span class="n">metricNameLike</span><span class="o">=</span><span class="s1">&#39;Nvisits&#39;</span><span class="p">,</span> <span class="n">metricMetadataLike</span><span class="o">=</span><span class="s1">&#39;WFD&#39;</span><span class="p">,</span> <span class="n">slicerNameLike</span><span class="o">=</span><span class="s1">&#39;UniSlicer&#39;</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">addSummaryStats</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">summaryStats</span><span class="p">[</span><span class="s1">&#39;Fraction of total Nvisits WFD&#39;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rx</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rx</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">runlist</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Fraction of visits in WFD&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
+<span class="c1">#plt.legend(loc=&#39;upper left&#39;, fancybox=True, shadow=True, fontsize=&#39;large&#39;)</span>
+<span class="c1">#plt.axhline(2000, color=&#39;k&#39;, linestyle=&#39;:&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[17]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>(0.8, 1.0)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/current_runs_26_1.png" src="_images/current_runs_26_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Median-Inter-Night-Gap-in-WFD-(per-filter)">
+<h2>Median Inter-Night Gap in WFD (per filter)<a class="headerlink" href="#Median-Inter-Night-Gap-in-WFD-(per-filter)" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="c1"># rolling cadence internight gaps</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">buildMetricDict</span><span class="p">(</span><span class="n">metricNameLike</span><span class="o">=</span><span class="s1">&#39;Median Inter-Night Gap&#39;</span><span class="p">,</span> <span class="n">metricMetadataLike</span><span class="o">=</span><span class="s1">&#39;WFD&#39;</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">addSummaryStats</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filterlist</span><span class="p">:</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="s1">&#39;WFD </span><span class="si">%s</span><span class="s1"> band&#39;</span> <span class="o">%</span> <span class="n">f</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">summaryStats</span><span class="p">[</span><span class="s1">&#39;Median Median Inter-Night Gap </span><span class="si">%s</span><span class="s1"> HealpixSlicer&#39;</span> <span class="o">%</span> <span class="n">metadata</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rx</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">filtercolors</span><span class="p">[</span><span class="n">f</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rx</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">runlist</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Median Inter-night Gap&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fancybox</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;large&#39;</span><span class="p">)</span>
+<span class="c1">#base = r.summaryStats[&#39;Nvisits All props&#39;][&#39;kraken_2026&#39;]/100000</span>
+<span class="c1">#plt.axhline(base, color=&#39;r&#39;, linestyle=&#39;:&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/current_runs_29_0.png" src="_images/current_runs_29_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Median-Inter-Night-Gap-in-WFD-(all-filters)">
+<h2>Median Inter-Night Gap in WFD (all filters)<a class="headerlink" href="#Median-Inter-Night-Gap-in-WFD-(all-filters)" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">metadata</span> <span class="o">=</span> <span class="s1">&#39;WFD all bands&#39;</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">summaryStats</span><span class="p">[</span><span class="s1">&#39;Median Median Inter-Night Gap </span><span class="si">%s</span><span class="s1"> HealpixSlicer&#39;</span> <span class="o">%</span> <span class="n">metadata</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rx</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">filtercolors</span><span class="p">[</span><span class="n">f</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rx</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">runlist</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Median Inter-night Gap WFD (All bands)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;x-large&#39;</span><span class="p">)</span>
+<span class="c1">#plt.legend(loc=&#39;upper right&#39;, fancybox=True, shadow=True, fontsize=&#39;large&#39;)</span>
+<span class="c1">#base = r.summaryStats[&#39;Nvisits All props&#39;][&#39;kraken_2026&#39;]/100000</span>
+<span class="c1">#plt.axhline(base, color=&#39;r&#39;, linestyle=&#39;:&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="bp">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/current_runs_31_0.png" src="_images/current_runs_31_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="c1"># # season length</span>
+<span class="c1"># m = r.buildMetricDict(metricNameLike=&#39;Season Length&#39;, metricMetadataLike=&#39;WFD&#39;)</span>
+<span class="c1"># r.addSummaryStats(m)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="c1"># plt.figure(figsize=(10, 8))</span>
+<span class="c1"># metadata = &#39;WFD all bands&#39;</span>
+<span class="c1"># s = r.summaryStats[&#39;Median Median Season Length %s HealpixSlicer&#39; % metadata]</span>
+<span class="c1"># plt.plot(rx, s, marker=&#39;.&#39;, color=filtercolors[f], label=f)</span>
+<span class="c1"># plt.xticks(rx, r.runlist, rotation=75, fontsize=&#39;x-large&#39;)</span>
+<span class="c1"># plt.ylabel(&quot;Median Season Length WFD&quot;, fontsize=&#39;x-large&#39;)</span>
+<span class="c1"># #plt.legend(loc=&#39;upper right&#39;, fancybox=True, shadow=True, fontsize=&#39;large&#39;)</span>
+<span class="c1"># #base = r.summaryStats[&#39;Nvisits All props&#39;][&#39;kraken_2026&#39;]/100000</span>
+<span class="c1"># #plt.axhline(base, color=&#39;r&#39;, linestyle=&#39;:&#39;)</span>
+<span class="c1"># plt.grid(True, alpha=0.3)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="HA-histograms">
+<h2>HA histograms<a class="headerlink" href="#HA-histograms" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">lsst.sims.maf.metricBundles</span> <span class="kn">as</span> <span class="nn">mb</span>
+<span class="n">ha</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filterlist</span><span class="p">:</span>
+    <span class="n">ha</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">mb</span><span class="o">.</span><span class="n">createEmptyMetricBundle</span><span class="p">()</span>
+    <span class="c1"># kraken_2026_HA_Histogram_g_band_ONED</span>
+    <span class="n">ha</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;kraken_2026&#39;</span><span class="p">,</span> <span class="s1">&#39;all_combine&#39;</span><span class="p">,</span> <span class="s1">&#39;kraken_2026_HA_Histogram_</span><span class="si">%s</span><span class="s1">_band_ONED.npz&#39;</span> <span class="o">%</span> <span class="n">f</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">lsst.sims.maf.plots</span> <span class="kn">as</span> <span class="nn">plots</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">ph</span> <span class="o">=</span> <span class="n">plots</span><span class="o">.</span><span class="n">PlotHandler</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">ph</span><span class="o">.</span><span class="n">setMetricBundles</span><span class="p">(</span><span class="n">ha</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">ph</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plotFunc</span><span class="o">=</span><span class="n">plots</span><span class="o">.</span><span class="n">OneDBinnedData</span><span class="p">(),</span> <span class="n">plotDicts</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;yMin&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;yMax&#39;</span><span class="p">:</span><span class="mi">32000</span><span class="p">,</span> <span class="s1">&#39;figsize&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">)})</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[27]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>1
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/current_runs_39_1.png" src="_images/current_runs_39_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="notebooks/complex_fbs_with_socs.html" class="btn btn-neutral" title="Feature Based Scheduler run with SOCS and custom scheduler configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Owen Boberg.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
