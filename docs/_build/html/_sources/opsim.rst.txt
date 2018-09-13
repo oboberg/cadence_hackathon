@@ -334,7 +334,7 @@ If you want to check that no observations were taken in ``r`` you can quickly do
     (lsst-scipipe-fcd27eb) [opsim@9d54f5d124e1 output]$
 
 This query will return nothing. For contrast, try the same thing with the first feature based run
-(``opsim-docker_2002.db``) that used the default configuration.
+(``opsim-docker_2000.db``) that used the default configuration.
 
 
 A new proposal based run

@@ -208,7 +208,7 @@ $ mv baseline2018a.db sims_maf_contrib/tutorials/baseline2018a.db
 <dt>Breakdown of command:</dt>
 <dd><ul class="first last simple">
 <li><code class="docutils literal"><span class="pre">docker</span> <span class="pre">run</span></code> run a docker container</li>
-<li><code class="docutils literal"><span class="pre">-it</span></code> Give me an an interactive shell in the container</li>
+<li><code class="docutils literal"><span class="pre">-it</span></code> give me an an interactive shell in the container</li>
 <li><code class="docutils literal"><span class="pre">--rm</span></code> remove the container after it is stopped</li>
 <li><code class="docutils literal"><span class="pre">-v</span> <span class="pre">${PWD}/maf_local</span></code> mounts the local <code class="docutils literal"><span class="pre">maf_local</span></code> into the container at the path <code class="docutils literal"><span class="pre">/home/docmaf/maf_local</span></code>.</li>
 <li><code class="docutils literal"><span class="pre">-v</span> <span class="pre">${PWD}/my_repos</span></code> mounts the local <code class="docutils literal"><span class="pre">my_repos</span></code> into the container at the path <code class="docutils literal"><span class="pre">/home/docmaf/my_repos</span></code>.</li>
@@ -226,6 +226,9 @@ docker container. It will look something like this</p>
 maf_local  my_repos  repo_pulls.sh  repos  stack  startup.sh
 </pre></div>
 </div>
+<p>In these examples do not include <code class="docutils literal"><span class="pre">(lsst-scipipe-10a4fa6)</span> <span class="pre">[docmaf&#64;7b8b90333725</span> <span class="pre">~]$</span></code>
+in your commands. This is included to illustrated when we are issuing commands in
+the docker container</p>
 </div>
 <div class="section" id="setup-the-sims-maf-contrib-package">
 <h2>Setup the sims_maf_contrib package<a class="headerlink" href="#setup-the-sims-maf-contrib-package" title="Permalink to this headline">¶</a></h2>
@@ -280,7 +283,7 @@ This will bring you back to the command prompt.</p>
 <p>Any work that you did in the <code class="docutils literal"><span class="pre">maf_local</span></code> directory in the container, will be saved to the local directory <code class="docutils literal"><span class="pre">~/flatiron/maf_local</span></code>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Since we started the container with the &#8211;rm flag it will be deleted as soon as we exit.
+<p class="last">Since we started the container with the <code class="docutils literal"><span class="pre">--rm</span></code> flag it will be deleted as soon as we exit.
 You certainly don’t have to use this flag, but be sure to manage the running or stopped containers you having lying around.</p>
 </div>
 </div>

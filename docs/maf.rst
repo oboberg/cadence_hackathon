@@ -33,7 +33,7 @@ Running the following command will start a docker container using the
 
 Breakdown of command:
  - ``docker run`` run a docker container
- - ``-it`` Give me an an interactive shell in the container
+ - ``-it`` give me an an interactive shell in the container
  - ``--rm`` remove the container after it is stopped
  - ``-v ${PWD}/maf_local`` mounts the local ``maf_local`` into the container at the path ``/home/docmaf/maf_local``.
  - ``-v ${PWD}/my_repos`` mounts the local ``my_repos`` into the container at the path ``/home/docmaf/my_repos``.
@@ -52,6 +52,9 @@ docker container. It will look something like this
     (lsst-scipipe-10a4fa6) [docmaf@7b8b90333725 ~]$ ls
     maf_local  my_repos  repo_pulls.sh  repos  stack  startup.sh
 
+In these examples do not include ``(lsst-scipipe-10a4fa6) [docmaf@7b8b90333725 ~]$``
+in your commands. This is included to illustrated when we are issuing commands in
+the docker container
 
 ++++++++++++++++++++++++++++++++++
 Setup the sims_maf_contrib package
@@ -121,5 +124,5 @@ You can now quit the container by simply typing exit.
 Any work that you did in the ``maf_local`` directory in the container, will be saved to the local directory ``~/flatiron/maf_local``.
 
 .. note::
-    Since we started the container with the --rm flag it will be deleted as soon as we exit.
+    Since we started the container with the ``--rm`` flag it will be deleted as soon as we exit.
     You certainly don’t have to use this flag, but be sure to manage the running or stopped containers you having lying around.
