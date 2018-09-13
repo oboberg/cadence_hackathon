@@ -1,0 +1,280 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Simple Feature Based Scheduler run with SOCS"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This example notebook show how to do a simple 1 day FBS run using SOCS. In this example we use the default FBS configuration, a separate example will be given on how to provide a custom configuration. \n",
+    "\n",
+    "Before running the notebook make sure you run `manage_db --save-dir $HOME/run_local/output/` on the command line to setup the SOCS database. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import logging\n",
+    "import healpy as hp\n",
+    "\n",
+    "from lsst.sims.ocs.database import SocsDatabase\n",
+    "from lsst.sims.ocs.kernel import Simulator\n",
+    "from lsst.sims.featureScheduler.driver import FeatureSchedulerDriver as Driver\n",
+    "from lsst.sims.ocs.setup import create_parser\n",
+    "from lsst.sims.ocs.setup import apply_file_config, read_file_config"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "logging.getLogger().setLevel(logging.INFO)\n",
+    "logging.basicConfig(level=logging.INFO,\n",
+    "                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',\n",
+    "                    datefmt='%m-%d %H:%M')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This next cell loads default command line arguments. These are needed mainly to setup the database."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "/home/opsim/run_local/output/ None None\n"
+     ]
+    }
+   ],
+   "source": [
+    "parser = create_parser()\n",
+    "args = parser.parse_known_args()[0]\n",
+    "prog_conf = read_file_config()\n",
+    "if prog_conf is not None:\n",
+    "    apply_file_config(prog_conf, args)\n",
+    "print(args.sqlite_save_dir, args.session_id_start, args.sqlite_session_save_dir)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Setup socs database to store simulations results, if needed. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "db = SocsDatabase(sqlite_save_path=args.sqlite_save_dir,\n",
+    "                  session_id_start=args.session_id_start,\n",
+    "                  sqlite_session_save_path=args.sqlite_session_save_dir)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "session_id = db.new_session(\"FBS test on notebook\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We now define a driver for the simulation. In this case, we already imported the FBS driver as Driver so we simply call it. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "driver = Driver()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "By default the duration of a simulation is 10 years. Here we will run a single day. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "args.frac_duration = 0.003"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We now set the SOCS simulator"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "sim = Simulator(args, db, driver=driver)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "09-13 17:51 kernel.Simulator INFO     Initializing simulation\n",
+      "09-13 17:51 kernel.Simulator INFO     Simulation Session Id = 2007\n",
+      "09-13 17:51 configuration.ConfigurationCommunicator INFO     Initializing configuration communication\n",
+      "09-13 17:51 kernel.Simulator INFO     Finishing simulation initialization\n"
+     ]
+    }
+   ],
+   "source": [
+    "sim.initialize()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "And run the simulation"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "09-13 17:51 kernel.Simulator INFO     Starting simulation\n",
+      "09-13 17:51 kernel.Simulator INFO     run: rx scheduler config survey_duration=3650.0\n",
+      "09-13 17:51 kernel.Simulator INFO     run: rx driver config={'ranking': {'coadd_values': 1, 'time_balancing': 1, 'timecost_time_max': 150.0, 'timecost_time_ref': 5.0, 'timecost_cost_ref': 0.3, 'timecost_weight': 1.0, 'filtercost_weight': 1.0, 'propboost_weight': 1.0, 'lookahead_window_size': 0, 'lookahead_bonus_weight': 0.0}, 'constraints': {'night_boundary': -12.0, 'ignore_sky_brightness': 0, 'ignore_airmass': 0, 'ignore_clouds': 0, 'ignore_seeing': 0}, 'darktime': {'new_moon_phase_threshold': 20.0}, 'startup': {'type': 'HOT', 'database': ''}}\n",
+      "09-13 17:51 kernel.Simulator INFO     run: rx site config={'obs_site': {'name': 'Cerro Pachon', 'latitude': -30.2444, 'longitude': -70.7494, 'height': 2650.0}}\n",
+      "09-13 17:51 kernel.Simulator INFO     run: rx telescope config={'telescope': {'altitude_minpos': 20.0, 'altitude_maxpos': 86.5, 'azimuth_minpos': -270.0, 'azimuth_maxpos': 270.0, 'altitude_maxspeed': 3.5, 'altitude_accel': 3.5, 'altitude_decel': 3.5, 'azimuth_maxspeed': 7.0, 'azimuth_accel': 7.0, 'azimuth_decel': 7.0, 'settle_time': 3.0}}\n",
+      "09-13 17:51 kernel.Simulator INFO     run: rx dome config={'dome': {'altitude_maxspeed': 1.75, 'altitude_accel': 0.875, 'altitude_decel': 0.875, 'altitude_freerange': 0.0, 'azimuth_maxspeed': 1.5, 'azimuth_accel': 0.75, 'azimuth_decel': 0.75, 'azimuth_freerange': 4.0, 'settle_time': 0.0}}\n",
+      "09-13 17:51 kernel.Simulator INFO     run: rx rotator config={'rotator': {'minpos': -90.0, 'maxpos': 90.0, 'maxspeed': 3.5, 'accel': 1.0, 'decel': 1.0, 'filter_change_pos': 0.0, 'follow_sky': 0, 'resume_angle': 0}}\n",
+      "09-13 17:51 kernel.Simulator INFO     run: rx camera config={'camera': {'readout_time': 2.0, 'shutter_time': 1.0, 'filter_change_time': 120.0, 'filter_max_changes_burst_num': 1, 'filter_max_changes_burst_time': 0.0, 'filter_max_changes_avg_num': 3000, 'filter_max_changes_avg_time': 31557600.0, 'filter_removable': ['y', 'z'], 'filter_mounted': ['g', 'r', 'i', 'z', 'y'], 'filter_unmounted': ['u']}}\n",
+      "09-13 17:51 kernel.Simulator INFO     run: rx slew config={'slew': {'prereq_domalt': [], 'prereq_domaz': [], 'prereq_domazsettle': ['domaz'], 'prereq_telalt': [], 'prereq_telaz': [], 'prereq_telopticsopenloop': ['telalt', 'telaz'], 'prereq_telopticsclosedloop': ['domalt', 'domazsettle', 'telsettle', 'readout', 'telopticsopenloop', 'filter', 'telrot'], 'prereq_telsettle': ['telalt', 'telaz'], 'prereq_telrot': [], 'prereq_filter': [], 'prereq_exposures': ['telopticsclosedloop'], 'prereq_readout': []}}\n",
+      "09-13 17:51 kernel.Simulator INFO     run: rx optics config={'optics_loop_corr': {'tel_optics_ol_slope': 0.2857142857142857, 'tel_optics_cl_alt_limit': [0.0, 9.0, 90.0], 'tel_optics_cl_delay': [0.0, 36.0]}}\n",
+      "09-13 17:51 kernel.Simulator INFO     run: rx park config={'park': {'telescope_altitude': 86.5, 'telescope_azimuth': 0.0, 'telescope_rotator': 0.0, 'dome_altitude': 90.0, 'dome_azimuth': 0.0, 'filter_position': 'z'}}\n",
+      "09-13 17:51 featureSchedulerDriver INFO     Loading feature based scheduler configuration from /home/opsim/repos/scheduler_config/config_run/feature_scheduler.py.\n",
+      "09-13 17:52 featureSchedulerDriver INFO     Start up type is HOT, no state will be read from the EFD.\n",
+      "09-13 17:52 kernel.Simulator INFO     Night 1\n",
+      "09-13 17:52 featureSchedulerDriver INFO     start_survey t=1664580953.883245\n",
+      "09-13 17:52 featureSchedulerDriver INFO     start_night t=1664580953.883245, night=1 timeprogress=0.00%\n",
+      "09-13 17:52 featureSchedulerDriver INFO     start_night t=1664580953.883245, night=1 timeprogress=0.00%\n",
+      "/home/opsim/repos/sims_skybrightness_pre/python/lsst/sims/skybrightness_pre/SkyModelPre.py:363: UserWarning: Requested MJD between sunrise and sunset, returning closest maps\n",
+      "  warnings.warn('Requested MJD between sunrise and sunset, returning closest maps')\n",
+      "/home/opsim/repos/sims_skybrightness_pre/python/lsst/sims/skybrightness_pre/SkyModelPre.py:279: UserWarning: Requested MJD between sunrise and sunset, returning closest maps\n",
+      "  warnings.warn('Requested MJD between sunrise and sunset, returning closest maps')\n",
+      "/home/opsim/repos/sims_seeingModel/python/lsst/sims/seeingModel/seeingModel.py:133: RuntimeWarning: invalid value encountered in power\n",
+      "  airmass_correction = np.power(airmass, 0.6)\n",
+      "/home/opsim/repos/sims_skybrightness_pre/python/lsst/sims/skybrightness_pre/SkyModelPre.py:49: RuntimeWarning: invalid value encountered in true_divide\n",
+      "  wterm = (x - xp[left])/baseline\n",
+      "09-13 17:53 featureSchedulerDriver INFO     end_night t=1664616576.277367, night=1 timeprogress=0.01%\n",
+      "09-13 17:53 featureSchedulerDriver INFO     end_night next moonphase=40.78%\n",
+      "09-13 17:53 featureSchedulerDriver INFO     end_night bright time waxing\n"
+     ]
+    }
+   ],
+   "source": [
+    "sim.run()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We now have access to all the scheduler data structure to play with. In the cell bellow, we plot the TargetMapBasis function for the `g` filter."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 612x388.8 with 2 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "hp.mollview(sim.driver.scheduler.survey_lists[0][1].basis_functions[2]())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.6"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

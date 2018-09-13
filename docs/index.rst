@@ -16,3 +16,4 @@ sections before starting with MAF or OpSim.
    directories
    maf
    opsim
+   notebooks/index

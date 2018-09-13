@@ -86,6 +86,7 @@
 <li class="toctree-l1"><a class="reference internal" href="directories.html">Directories and GitHub repos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="maf.html">MAF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="opsim.html">OpSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/index.html">Feature Based Scheduler Jupyter Notebooks</a></li>
 </ul>
 
             
@@ -150,7 +151,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="getting-started-with-maf-and-opsim">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="getting-started-with-maf-and-opsim">
 <h1>Getting Started with MAF and OpSim<a class="headerlink" href="#getting-started-with-maf-and-opsim" title="Permalink to this headline">¶</a></h1>
 <p>Here you will find some basic instructions for
 running MAF and OpSim using Docker containers. Please see Docker and Directories
@@ -161,6 +181,7 @@ sections before starting with MAF or OpSim.</p>
 <li class="toctree-l1"><a class="reference internal" href="directories.html">Directories and GitHub repos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="maf.html">MAF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="opsim.html">OpSim</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/index.html">Feature Based Scheduler Jupyter Notebooks</a></li>
 </ul>
 </div>
 </div>
@@ -216,6 +237,7 @@ sections before starting with MAF or OpSim.</p>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

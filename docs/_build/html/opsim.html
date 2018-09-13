@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Feature Based Scheduler Jupyter Notebooks" href="notebooks/index.html" />
     <link rel="prev" title="MAF" href="maf.html" /> 
 
   
@@ -103,6 +104,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#quitting-the-container">Quitting the container</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/index.html">Feature Based Scheduler Jupyter Notebooks</a></li>
 </ul>
 
             
@@ -167,7 +169,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="opsim">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="opsim">
 <h1>OpSim<a class="headerlink" href="#opsim" title="Permalink to this headline">¶</a></h1>
 <p>Here we will go over how to run a very simple one night simulation. Before
 following these directions, make sure you have set up the directories as
@@ -556,6 +577,8 @@ saved on your local host.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="notebooks/index.html" class="btn btn-neutral float-right" title="Feature Based Scheduler Jupyter Notebooks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
       
         <a href="maf.html" class="btn btn-neutral" title="MAF" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
@@ -599,6 +622,7 @@ saved on your local host.</p>
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

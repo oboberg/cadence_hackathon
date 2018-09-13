@@ -1,0 +1,630 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Simple Feature Based Scheduler run with SOCS &mdash; Hackathon Demos 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Feature Based Scheduler run with SOCS and custom scheduler configuration" href="complex_fbs_with_socs.html" />
+    <link rel="prev" title="Feature Based Scheduler Jupyter Notebooks" href="index.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Hackathon Demos
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../docker.html">Docker installation and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../directories.html">Directories and GitHub repos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../maf.html">MAF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../opsim.html">OpSim</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Feature Based Scheduler Jupyter Notebooks</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Simple Feature Based Scheduler run with SOCS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="complex_fbs_with_socs.html">Feature Based Scheduler run with SOCS and custom scheduler configuration</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Hackathon Demos</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Feature Based Scheduler Jupyter Notebooks</a> &raquo;</li>
+        
+      <li>Simple Feature Based Scheduler run with SOCS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/notebooks/simple_fbs_with_socs.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="Simple-Feature-Based-Scheduler-run-with-SOCS">
+<h1>Simple Feature Based Scheduler run with SOCS<a class="headerlink" href="#Simple-Feature-Based-Scheduler-run-with-SOCS" title="Permalink to this headline">¶</a></h1>
+<p>This example notebook show how to do a simple 1 day FBS run using SOCS.
+In this example we use the default FBS configuration, a separate example
+will be given on how to provide a custom configuration.</p>
+<p>Before running the notebook make sure you run
+<code class="docutils literal"><span class="pre">manage_db</span> <span class="pre">--save-dir</span> <span class="pre">$HOME/run_local/output/</span></code> on the command line to
+setup the SOCS database.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">healpy</span> <span class="kn">as</span> <span class="nn">hp</span>
+
+<span class="kn">from</span> <span class="nn">lsst.sims.ocs.database</span> <span class="kn">import</span> <span class="n">SocsDatabase</span>
+<span class="kn">from</span> <span class="nn">lsst.sims.ocs.kernel</span> <span class="kn">import</span> <span class="n">Simulator</span>
+<span class="kn">from</span> <span class="nn">lsst.sims.featureScheduler.driver</span> <span class="kn">import</span> <span class="n">FeatureSchedulerDriver</span> <span class="k">as</span> <span class="n">Driver</span>
+<span class="kn">from</span> <span class="nn">lsst.sims.ocs.setup</span> <span class="kn">import</span> <span class="n">create_parser</span>
+<span class="kn">from</span> <span class="nn">lsst.sims.ocs.setup</span> <span class="kn">import</span> <span class="n">apply_file_config</span><span class="p">,</span> <span class="n">read_file_config</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
+                    <span class="n">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(name)-12s</span><span class="s1"> </span><span class="si">%(levelname)-8s</span><span class="s1"> </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="n">datefmt</span><span class="o">=</span><span class="s1">&#39;%m-</span><span class="si">%d</span><span class="s1"> %H:%M&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>This next cell loads default command line arguments. These are needed
+mainly to setup the database.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">parser</span> <span class="o">=</span> <span class="n">create_parser</span><span class="p">()</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">prog_conf</span> <span class="o">=</span> <span class="n">read_file_config</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">prog_conf</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">apply_file_config</span><span class="p">(</span><span class="n">prog_conf</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">sqlite_save_dir</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">session_id_start</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">sqlite_session_save_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/home/opsim/run_local/output/ None None
+</pre></div></div>
+</div>
+<p>Setup socs database to store simulations results, if needed.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">db</span> <span class="o">=</span> <span class="n">SocsDatabase</span><span class="p">(</span><span class="n">sqlite_save_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">sqlite_save_dir</span><span class="p">,</span>
+                  <span class="n">session_id_start</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">session_id_start</span><span class="p">,</span>
+                  <span class="n">sqlite_session_save_path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">sqlite_session_save_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">session_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">new_session</span><span class="p">(</span><span class="s2">&quot;FBS test on notebook&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We now define a driver for the simulation. In this case, we already
+imported the FBS driver as Driver so we simply call it.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">driver</span> <span class="o">=</span> <span class="n">Driver</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>By default the duration of a simulation is 10 years. Here we will run a
+single day.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">args</span><span class="o">.</span><span class="n">frac_duration</span> <span class="o">=</span> <span class="mf">0.003</span>
+</pre></div>
+</div>
+</div>
+<p>We now set the SOCS simulator</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">Simulator</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="n">driver</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">sim</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+09-13 17:51 kernel.Simulator INFO     Initializing simulation
+09-13 17:51 kernel.Simulator INFO     Simulation Session Id = 2007
+09-13 17:51 configuration.ConfigurationCommunicator INFO     Initializing configuration communication
+09-13 17:51 kernel.Simulator INFO     Finishing simulation initialization
+</pre></div></div>
+</div>
+<p>And run the simulation</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="stderr output_area docutils container">
+<div class="highlight"><pre>
+09-13 17:51 kernel.Simulator INFO     Starting simulation
+09-13 17:51 kernel.Simulator INFO     run: rx scheduler config survey_duration=3650.0
+09-13 17:51 kernel.Simulator INFO     run: rx driver config={&#39;ranking&#39;: {&#39;coadd_values&#39;: 1, &#39;time_balancing&#39;: 1, &#39;timecost_time_max&#39;: 150.0, &#39;timecost_time_ref&#39;: 5.0, &#39;timecost_cost_ref&#39;: 0.3, &#39;timecost_weight&#39;: 1.0, &#39;filtercost_weight&#39;: 1.0, &#39;propboost_weight&#39;: 1.0, &#39;lookahead_window_size&#39;: 0, &#39;lookahead_bonus_weight&#39;: 0.0}, &#39;constraints&#39;: {&#39;night_boundary&#39;: -12.0, &#39;ignore_sky_brightness&#39;: 0, &#39;ignore_airmass&#39;: 0, &#39;ignore_clouds&#39;: 0, &#39;ignore_seeing&#39;: 0}, &#39;darktime&#39;: {&#39;new_moon_phase_threshold&#39;: 20.0}, &#39;startup&#39;: {&#39;type&#39;: &#39;HOT&#39;, &#39;database&#39;: &#39;&#39;}}
+09-13 17:51 kernel.Simulator INFO     run: rx site config={&#39;obs_site&#39;: {&#39;name&#39;: &#39;Cerro Pachon&#39;, &#39;latitude&#39;: -30.2444, &#39;longitude&#39;: -70.7494, &#39;height&#39;: 2650.0}}
+09-13 17:51 kernel.Simulator INFO     run: rx telescope config={&#39;telescope&#39;: {&#39;altitude_minpos&#39;: 20.0, &#39;altitude_maxpos&#39;: 86.5, &#39;azimuth_minpos&#39;: -270.0, &#39;azimuth_maxpos&#39;: 270.0, &#39;altitude_maxspeed&#39;: 3.5, &#39;altitude_accel&#39;: 3.5, &#39;altitude_decel&#39;: 3.5, &#39;azimuth_maxspeed&#39;: 7.0, &#39;azimuth_accel&#39;: 7.0, &#39;azimuth_decel&#39;: 7.0, &#39;settle_time&#39;: 3.0}}
+09-13 17:51 kernel.Simulator INFO     run: rx dome config={&#39;dome&#39;: {&#39;altitude_maxspeed&#39;: 1.75, &#39;altitude_accel&#39;: 0.875, &#39;altitude_decel&#39;: 0.875, &#39;altitude_freerange&#39;: 0.0, &#39;azimuth_maxspeed&#39;: 1.5, &#39;azimuth_accel&#39;: 0.75, &#39;azimuth_decel&#39;: 0.75, &#39;azimuth_freerange&#39;: 4.0, &#39;settle_time&#39;: 0.0}}
+09-13 17:51 kernel.Simulator INFO     run: rx rotator config={&#39;rotator&#39;: {&#39;minpos&#39;: -90.0, &#39;maxpos&#39;: 90.0, &#39;maxspeed&#39;: 3.5, &#39;accel&#39;: 1.0, &#39;decel&#39;: 1.0, &#39;filter_change_pos&#39;: 0.0, &#39;follow_sky&#39;: 0, &#39;resume_angle&#39;: 0}}
+09-13 17:51 kernel.Simulator INFO     run: rx camera config={&#39;camera&#39;: {&#39;readout_time&#39;: 2.0, &#39;shutter_time&#39;: 1.0, &#39;filter_change_time&#39;: 120.0, &#39;filter_max_changes_burst_num&#39;: 1, &#39;filter_max_changes_burst_time&#39;: 0.0, &#39;filter_max_changes_avg_num&#39;: 3000, &#39;filter_max_changes_avg_time&#39;: 31557600.0, &#39;filter_removable&#39;: [&#39;y&#39;, &#39;z&#39;], &#39;filter_mounted&#39;: [&#39;g&#39;, &#39;r&#39;, &#39;i&#39;, &#39;z&#39;, &#39;y&#39;], &#39;filter_unmounted&#39;: [&#39;u&#39;]}}
+09-13 17:51 kernel.Simulator INFO     run: rx slew config={&#39;slew&#39;: {&#39;prereq_domalt&#39;: [], &#39;prereq_domaz&#39;: [], &#39;prereq_domazsettle&#39;: [&#39;domaz&#39;], &#39;prereq_telalt&#39;: [], &#39;prereq_telaz&#39;: [], &#39;prereq_telopticsopenloop&#39;: [&#39;telalt&#39;, &#39;telaz&#39;], &#39;prereq_telopticsclosedloop&#39;: [&#39;domalt&#39;, &#39;domazsettle&#39;, &#39;telsettle&#39;, &#39;readout&#39;, &#39;telopticsopenloop&#39;, &#39;filter&#39;, &#39;telrot&#39;], &#39;prereq_telsettle&#39;: [&#39;telalt&#39;, &#39;telaz&#39;], &#39;prereq_telrot&#39;: [], &#39;prereq_filter&#39;: [], &#39;prereq_exposures&#39;: [&#39;telopticsclosedloop&#39;], &#39;prereq_readout&#39;: []}}
+09-13 17:51 kernel.Simulator INFO     run: rx optics config={&#39;optics_loop_corr&#39;: {&#39;tel_optics_ol_slope&#39;: 0.2857142857142857, &#39;tel_optics_cl_alt_limit&#39;: [0.0, 9.0, 90.0], &#39;tel_optics_cl_delay&#39;: [0.0, 36.0]}}
+09-13 17:51 kernel.Simulator INFO     run: rx park config={&#39;park&#39;: {&#39;telescope_altitude&#39;: 86.5, &#39;telescope_azimuth&#39;: 0.0, &#39;telescope_rotator&#39;: 0.0, &#39;dome_altitude&#39;: 90.0, &#39;dome_azimuth&#39;: 0.0, &#39;filter_position&#39;: &#39;z&#39;}}
+09-13 17:51 featureSchedulerDriver INFO     Loading feature based scheduler configuration from /home/opsim/repos/scheduler_config/config_run/feature_scheduler.py.
+09-13 17:52 featureSchedulerDriver INFO     Start up type is HOT, no state will be read from the EFD.
+09-13 17:52 kernel.Simulator INFO     Night 1
+09-13 17:52 featureSchedulerDriver INFO     start_survey t=1664580953.883245
+09-13 17:52 featureSchedulerDriver INFO     start_night t=1664580953.883245, night=1 timeprogress=0.00%
+09-13 17:52 featureSchedulerDriver INFO     start_night t=1664580953.883245, night=1 timeprogress=0.00%
+/home/opsim/repos/sims_skybrightness_pre/python/lsst/sims/skybrightness_pre/SkyModelPre.py:363: UserWarning: Requested MJD between sunrise and sunset, returning closest maps
+  warnings.warn(&#39;Requested MJD between sunrise and sunset, returning closest maps&#39;)
+/home/opsim/repos/sims_skybrightness_pre/python/lsst/sims/skybrightness_pre/SkyModelPre.py:279: UserWarning: Requested MJD between sunrise and sunset, returning closest maps
+  warnings.warn(&#39;Requested MJD between sunrise and sunset, returning closest maps&#39;)
+/home/opsim/repos/sims_seeingModel/python/lsst/sims/seeingModel/seeingModel.py:133: RuntimeWarning: invalid value encountered in power
+  airmass_correction = np.power(airmass, 0.6)
+/home/opsim/repos/sims_skybrightness_pre/python/lsst/sims/skybrightness_pre/SkyModelPre.py:49: RuntimeWarning: invalid value encountered in true_divide
+  wterm = (x - xp[left])/baseline
+09-13 17:53 featureSchedulerDriver INFO     end_night t=1664616576.277367, night=1 timeprogress=0.01%
+09-13 17:53 featureSchedulerDriver INFO     end_night next moonphase=40.78%
+09-13 17:53 featureSchedulerDriver INFO     end_night bright time waxing
+</pre></div></div>
+</div>
+<p>We now have access to all the scheduler data structure to play with. In
+the cell bellow, we plot the TargetMapBasis function for the <code class="docutils literal"><span class="pre">g</span></code>
+filter.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">hp</span><span class="o">.</span><span class="n">mollview</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">survey_lists</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">basis_functions</span><span class="p">[</span><span class="mi">2</span><span class="p">]())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_simple_fbs_with_socs_19_0.png" src="../_images/notebooks_simple_fbs_with_socs_19_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="complex_fbs_with_socs.html" class="btn btn-neutral float-right" title="Feature Based Scheduler run with SOCS and custom scheduler configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Feature Based Scheduler Jupyter Notebooks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Owen Boberg.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
