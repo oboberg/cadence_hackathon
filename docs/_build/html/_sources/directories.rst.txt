@@ -26,12 +26,12 @@ can be changed to whatever you like, just be sure to update the examples accordi
    cd my_repos
    git clone https://github.com/lsst/sims_maf.git
    git clone https://github.com/lsst-ts/scheduler_config
-   git clone git clone https://github.com/lsst/sims_featureScheduler.git
+   git clone https://github.com/lsst/sims_featureScheduler.git
 
 3. If you are on a linux system you will need to open up the read/write permissions
 of any of the local directories that will be mounted inside of docker containers.
 For these tutorials you will need to do this for ``maf_local``, ``my_repos``,
-and ``run_local``. Again, please see this `link <https://docs.docker.com/install/linux/linux-postinstall/#next-steps/>`_
+and ``opsimv4_data``. Again, please see this `link <https://docs.docker.com/install/linux/linux-postinstall/#next-steps/>`_
 for additional setup steps for using docker on linux.
 
 .. code-block:: bash
